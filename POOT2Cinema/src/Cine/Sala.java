@@ -7,6 +7,11 @@ public class Sala implements Serializable {
 	
 	private String numero;
 	private Assento lugares;
+	
+	public Sala(String numero) {
+		this.numero = numero;
+		
+	}
 
 	public String getNumero() {
 		return numero;
