@@ -1,8 +1,10 @@
 package Cine;
 
-public class Genero {
+import java.io.Serializable;
 
-	String nome;
+public class Genero implements Serializable{
+
+	private String nome;
 
 	public String getNome() {
 		return nome;

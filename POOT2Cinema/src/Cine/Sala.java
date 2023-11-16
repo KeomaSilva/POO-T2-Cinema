@@ -1,8 +1,11 @@
 package Cine;
 
-public class Sala {
-	String numero;
-	Assento lugares;
+import java.io.Serializable;
+
+public class Sala implements Serializable {
+	
+	private String numero;
+	private Assento lugares;
 
 	public String getNumero() {
 		return numero;

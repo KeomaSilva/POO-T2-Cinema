@@ -1,15 +1,17 @@
 package Cine;
 
-public class Ingresso {
+import java.io.Serializable;
 
-	String nomeComprador;
-	String data;
-	String celular;
-	String preco;
-	String meiaEntrada;
-	Assento assento;
-	Filme filme;
-	Horario horario;
+public class Ingresso implements Serializable{
+
+	private String nomeComprador;
+	private String data;
+	private String celular;
+	private String preco;
+	private String meiaEntrada;
+	private Assento assento;
+	private Filme filme;
+	private Horario horario;
 
 	public String getNomeComprador() {
 		return nomeComprador;

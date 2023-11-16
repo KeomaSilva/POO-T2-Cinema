@@ -1,11 +1,13 @@
 package Cine;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
 	
-	String nome;
-	String enfereco;
-	Sala sala;
-	Filme filme;
+	private String nome;
+	private String enfereco;
+	private Sala sala;
+	private Filme filme;
 	
 
 }
