@@ -1,9 +1,11 @@
 package Cine;
 
-public class Horario {
-	String data;
-	String horario;
-	Sala sala;
+import java.io.Serializable;
+
+public class Horario implements Serializable{
+	private String data;
+	private String horario;
+	private Sala sala;
 
 	public String getData() {
 		return data;

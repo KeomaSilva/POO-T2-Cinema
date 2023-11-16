@@ -1,10 +1,12 @@
 package Cine;
 
-public class Pessoa {
+import java.io.Serializable;
 
-	String nome;
-	String paisOrigem;
-	Pessoa casado;
+public class Pessoa implements Serializable{
+
+	private String nome;
+	private String paisOrigem;
+	private Pessoa casado;
 
 	public String getNome() {
 		return nome;

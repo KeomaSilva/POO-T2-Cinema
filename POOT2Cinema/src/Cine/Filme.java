@@ -1,14 +1,16 @@
 package Cine;
 
-public class Filme {
-	String nome;
-	String descricao;
-	String duracao;
-	String ano;
-	Horario horario;
-	Genero genero;
-	Ator[] atores;
-	Diretor diretor;
+import java.io.Serializable;
+
+public class Filme implements Serializable{
+	private String nome;
+	private String descricao;
+	private String duracao;
+	private String ano;
+	private Horario horario;
+	private Genero genero;
+	private Ator[] atores;
+	private Diretor diretor;
 
 	public String getNome() {
 		return nome;

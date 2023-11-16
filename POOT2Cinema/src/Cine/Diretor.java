@@ -1,5 +1,7 @@
 package Cine;
 
-public class Diretor extends Pessoa{
+import java.io.Serializable;
+
+public class Diretor extends Pessoa implements Serializable{
 
 }

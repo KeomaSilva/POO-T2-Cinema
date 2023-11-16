@@ -1,10 +1,10 @@
 package Cine;
 
-public class Assento {
+public class Assento implements Serializable {
 
-	int fileira;
-	int numero;
-	Sala sala;
+	private int fileira;
+	private int numero;
+	private Sala sala;
 	
 
 	public Sala getSala() {

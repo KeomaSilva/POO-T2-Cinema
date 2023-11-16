@@ -1,6 +1,8 @@
 package Cine;
 
-public class Ator extends Pessoa{
+import java.io.Serializable;
+
+public class Ator extends Pessoa implements Serializable{
 	
 	
 
