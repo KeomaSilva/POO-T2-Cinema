@@ -1,7 +1,10 @@
 package Cine;
 
+import java.io.Serializable;
+
 public class Assento implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int fileira;
 	private int numero;
 	private Sala sala;

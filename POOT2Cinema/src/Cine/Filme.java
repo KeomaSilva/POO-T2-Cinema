@@ -3,6 +3,7 @@ package Cine;
 import java.io.Serializable;
 
 public class Filme implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String descricao;
 	private String duracao;
