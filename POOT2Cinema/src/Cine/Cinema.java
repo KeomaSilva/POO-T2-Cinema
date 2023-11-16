@@ -11,18 +11,20 @@ public class Cinema implements Serializable {
 	private String endereco;
 	private Filme filme;
 	private List<Sala> salas;
-	
+
 	public Cinema(String nome, String endereco, int nsalas) {
 		salas = new ArrayList<>();
 		this.nome = nome;
 		this.endereco = endereco;
-		for(int i =0; i<=nsalas;) {
-			String str = "10"+i;
-			salas.add(new Sala(str));
+		for (int i = 1; i <= nsalas;) {
+			salas.add(new Sala(i));
 		}
-		
+
 	}
-	
+
+	public void addSala(int numero) {
+		this.salas.add(new Sala(numero));
+	}
 
 	public String getNome() {
 		return nome;
