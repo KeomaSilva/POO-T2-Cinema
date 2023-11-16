@@ -1,8 +1,7 @@
 package Cine;
 
-import java.io.Serializable;
 
-public class Principal implements Serializable{
+public class Principal {
 	private Cinema ucs;
 
 	public Principal() {
@@ -15,8 +14,11 @@ public class Principal implements Serializable{
 	}
 	
 	public void menu() {
-		System.out.println("-------------------------------");
-		System.out.println("--- Bem Vindo ao Cinema POO ---");
+		System.out.println("-----------------------");
+		System.out.println("Bem Vindo ao Cinema POO");
+		System.out.println("1 - Comprar ingresso");
+		System.out.println("2 - Listar filmes ativos");
+		System.out.println("3 - Cadastrar filme");
 		
 	}
 

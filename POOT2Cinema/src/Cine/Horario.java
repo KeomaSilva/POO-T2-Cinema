@@ -3,6 +3,7 @@ package Cine;
 import java.io.Serializable;
 
 public class Horario implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String data;
 	private String horario;
 	private Sala sala;
