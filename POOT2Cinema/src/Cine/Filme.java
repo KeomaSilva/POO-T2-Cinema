@@ -1,17 +1,41 @@
 package Cine;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Filme implements Serializable{
+public class Filme implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String descricao;
 	private String duracao;
 	private String ano;
-	private Horario horario;
 	private Genero genero;
-	private Ator[] atores;
-	private Diretor diretor;
+	private Set<Horario> horarios;
+	private Set<Ator> atores;
+	private Set<Diretor> diretores;
+
+	public Filme(String nome, String descricao, String duracao, String ano, String genero) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.duracao = duracao;
+		this.genero = new Genero(genero);
+		horarios = new HashSet<>();
+		atores = new HashSet<>();
+		diretores = new HashSet<>();
+	}
+
+	public void addHorarios(String data, String horario, Sala sala) {
+
+		horarios.add(new Horario(data, horario, sala));
+
+	}
+	public void addAtores() {
+		
+	}
+	public void addDiretores() {
+		
+	}
 
 	public String getNome() {
 		return nome;
@@ -45,36 +69,12 @@ public class Filme implements Serializable{
 		this.ano = ano;
 	}
 
-	public Horario getHorario() {
-		return horario;
-	}
-
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
-
 	public Genero getGenero() {
 		return genero;
 	}
 
 	public void setGenero(Genero genero) {
 		this.genero = genero;
-	}
-
-	public Ator[] getAtores() {
-		return atores;
-	}
-
-	public void setAtores(Ator[] atores) {
-		this.atores = atores;
-	}
-
-	public Diretor getDiretor() {
-		return diretor;
-	}
-
-	public void setDiretor(Diretor diretor) {
-		this.diretor = diretor;
 	}
 
 }

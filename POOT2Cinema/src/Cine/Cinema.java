@@ -1,19 +1,25 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Cinema implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String endereco;
-	private Filme filme;
-	private List<Sala> salas;
+	private Set<Filme> filmes;
+	private Set<Sala> salas;
+
+	public Cinema() {
+		salas = new HashSet<>();
+		filmes = new TreeSet<>();
+	}
 
 	public Cinema(String nome, String endereco, int nsalas) {
-		salas = new ArrayList<>();
+		this();
 		this.nome = nome;
 		this.endereco = endereco;
 		for (int i = 1; i <= nsalas;) {
@@ -22,8 +28,13 @@ public class Cinema implements Serializable {
 
 	}
 
-	public void addSala(int numero) {
-		this.salas.add(new Sala(numero));
+	public void addFilme() {
+		filmes.add(new Filme());
+	}
+
+	public void addSala() {
+		int index = this.salas.size();
+		this.salas.add(new Sala(index+1));
 	}
 
 	public String getNome() {
@@ -41,13 +52,4 @@ public class Cinema implements Serializable {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	public Filme getFilme() {
-		return filme;
-	}
-
-	public void setFilme(Filme filme) {
-		this.filme = filme;
-	}
-
 }
