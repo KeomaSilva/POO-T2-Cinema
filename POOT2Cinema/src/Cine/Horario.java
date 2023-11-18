@@ -13,6 +13,9 @@ public class Horario implements Serializable {
 		this.horario = horario;
 		this.sala = sala;
 	}
+	public String toString() {
+		return this.horario;
+	}
 
 	public String getData() {
 		return data;

@@ -34,6 +34,7 @@ public class Principal {
 				comprarIngresso();
 			case 2:
 				filmesCatalogo();
+				menu();
 			case 3:
 				menuCadastrar();
 			case 4:
@@ -47,7 +48,7 @@ public class Principal {
 	}
 
 	public void filmesCatalogo() {
-
+		cineUcs.getFilmes();
 	}
 
 	public void menuCadastrar() {
@@ -58,10 +59,9 @@ public class Principal {
 			System.out.println("----MENU CADASTRAR----");
 			System.out.println("1 - Dados do Cinema");
 			System.out.println("2 - Listar Salas do Cinema");
-			System.out.println("3 - Filme ao catálago");
-			System.out.println("4 - Alterar dados de Filmes");
-			System.out.println("5 - Adicionar Atores ao banco de dados");
-			System.out.println("6 - Adicionar diretores ao banco de dados");
+			System.out.println("3 - Dados dos Filmes");
+			System.out.println("4 - Adicionar Atores ao banco de dados");
+			System.out.println("5 - Adicionar diretores ao banco de dados");
 			opcao = sc.nextInt();
 			sc.nextLine();
 			switch (opcao) {
@@ -70,7 +70,7 @@ public class Principal {
 			case 2:
 				listarSalasCinema();
 			case 3:
-				addFilmeCatalogo();
+				dadosFilmesCinema();
 			case 4:
 				alterarDadosFilme();
 			case 5:
@@ -108,7 +108,44 @@ public class Principal {
 	}
 
 	public void listarSalasCinema() {
+		String res;
+		System.out.println("-----------------------");
+		System.out.println("- Salas do Cinema - ");
+		System.out.println(cineUcs.getSalas());
+		do {
+			System.out.println("Adicionar sala ao Cinema? [S] sim / [N] não");
+			res = sc.nextLine().toLowerCase();
+			if (res == "s") {
+				cineUcs.addSala();
+				System.out.println(gravarDados());
+				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
+				res = sc.nextLine().toLowerCase();
+			}
+		} while (res == "s");
 	}
+	
+	public void dadosFilmesCinema() {
+		String res;
+		int opcao;
+		
+		System.out.println("-----------------------");
+		filmesCatalogo();
+		System.out.println("1 - Adicionar filme ao Catálago");
+		System.out.println("2 - Alterar dados do filme");
+		opcao=sc.nextInt();
+		switch(opcao) {
+		case 1:
+			System.out.println("Adicionando filem ao catálago");
+			System.out.println("Qual o nome do filme?");
+			res=sc.nextLine();
+			cineUcs.addFilme(res);
+			
+		}
+		
+		
+		
+	}
+	
 
 	public String gravarDados() {
 		try {

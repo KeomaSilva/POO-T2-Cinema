@@ -11,13 +11,14 @@ public class Filme implements Serializable {
 	private String descricao;
 	private String duracao;
 	private String ano;
-	private Genero genero;
+	private Set<Genero> generos;
 	private Set<Horario> horarios;
 	private Set<Ator> atores;
 	private Set<Diretor> diretores;
 
 	public Filme(String nome) {
 		this.nome = nome;
+		generos = new HashSet<>();
 		horarios = new HashSet<>();
 		atores = new HashSet<>();
 		diretores = new HashSet<>();
@@ -31,11 +32,11 @@ public class Filme implements Serializable {
 
 	public String addAtores(String nome) {
 		String res;
-		for(Ator ator:this.atores) {
-			if(nome.equalsIgnoreCase(ator.getNome())) {
+		for (Ator ator : this.atores) {
+			if (nome.equalsIgnoreCase(ator.getNome())) {
 				res = "O ator já está presente no elenco";
 				return res;
-			}else {
+			} else {
 				res = "Ator adicionado no elenco";
 				return res;
 			}
@@ -50,6 +51,36 @@ public class Filme implements Serializable {
 			}
 			;
 		}
+	}
+
+	public String detalhesFilme() {
+		StringBuilder str = new StringBuilder();
+		str.append("Filme: " + this.nome + " - ");
+		str.append("Ano: " + this.ano + "-");
+		str.append("Duração:"+this.duracao+" - ");
+		str.append("Gênero: ");
+		for (Genero genero : generos) {
+			str.append(genero + " ,");
+		}
+		str.append("- Horários: ");
+		for (Horario horario : horarios) {
+			str.append(horario + ", ");
+		}
+		str.append("- Sinapse: " + this.descricao + " - ");
+		str.append("Diretor(a): ");
+		for (Diretor diretor : diretores) {
+			str.append(diretor + " ,");
+		}
+		str.append("- Elenco: ");
+		for(Ator ator:atores) {
+			str.append(ator+" ,");
+		}
+
+		return str.toString();
+	}
+
+	public String toString() {
+		return this.nome;
 	}
 
 	public String getNome() {
@@ -82,14 +113,6 @@ public class Filme implements Serializable {
 
 	public void setAno(String ano) {
 		this.ano = ano;
-	}
-
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Genero genero) {
-		this.genero = genero;
 	}
 
 }
