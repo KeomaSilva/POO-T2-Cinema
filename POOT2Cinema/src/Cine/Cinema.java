@@ -28,13 +28,23 @@ public class Cinema implements Serializable {
 
 	}
 
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("------------------");
+		str.append("Nome: " + this.nome);
+		str.append("Endereço: " + this.endereco);
+		str.append("Quantidades de filmes em cartaz: " + this.filmes.size());
+		str.append("Quantidade de salas: " + this.salas.size());
+		return str.toString();
+	}
+
 	public void addFilme() {
 		filmes.add(new Filme());
 	}
 
 	public void addSala() {
 		int index = this.salas.size();
-		this.salas.add(new Sala(index+1));
+		this.salas.add(new Sala(index + 1));
 	}
 
 	public String getNome() {

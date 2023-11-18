@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Principal {
 	private static Scanner sc;
-	private Cinema ucs;
+	private Cinema cineUcs;
 
 	public Principal() {
-		Cinema ucs = new Cinema();
+		cineUcs = new Cinema();
 	}
 
 	public static void main(String[] args) {
@@ -76,16 +76,47 @@ public class Principal {
 			case 5:
 				addAtorBanco();
 			case 6:
-				addDiretorBanco();	
-				
+				addDiretorBanco();
+			}
+
 		} while (opcao != 0);
 	}
-		public void dadosCinema() {
-			
+
+	public void dadosCinema() {
+		String res;
+		String opcao = "a";
+		System.out.println("-----------------------");
+		System.out.println(cineUcs);
+		System.out.println("Alterar nome do Cinema? [S] sim / [N] não");
+		opcao = sc.nextLine();
+		if (opcao.toLowerCase() == "s") {
+			System.out.println("Altere o nome do cinema:");
+			res = sc.nextLine();
+			cineUcs.setNome(res);
+			System.out.println(gravarDados());
 		}
-		public void listarSalasCinema() {
-			
+		System.out.println("Alterar endereço do Cinema? [S] sim / [N] não");
+		opcao = sc.nextLine();
+		if (opcao.toLowerCase() == "s") {
+			System.out.println("Alter o endereço do cinema:");
+			res = sc.nextLine();
+			cineUcs.setEndereco(res);
+			System.out.println(gravarDados());
 		}
-		public
+		System.out.println("Retornando para o menu principal");
+		menu();
+	}
+
+	public void listarSalasCinema() {
+	}
+
+	public String gravarDados() {
+		try {
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "Dados gravados com sucesso";
+	}
 
 }
