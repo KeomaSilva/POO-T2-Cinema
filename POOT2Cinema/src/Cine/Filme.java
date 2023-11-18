@@ -2,6 +2,7 @@ package Cine;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Filme implements Serializable {
@@ -15,11 +16,8 @@ public class Filme implements Serializable {
 	private Set<Ator> atores;
 	private Set<Diretor> diretores;
 
-	public Filme(String nome, String descricao, String duracao, String ano, String genero) {
+	public Filme(String nome) {
 		this.nome = nome;
-		this.descricao = descricao;
-		this.duracao = duracao;
-		this.genero = new Genero(genero);
 		horarios = new HashSet<>();
 		atores = new HashSet<>();
 		diretores = new HashSet<>();
@@ -30,11 +28,28 @@ public class Filme implements Serializable {
 		horarios.add(new Horario(data, horario, sala));
 
 	}
-	public void addAtores() {
-		
+
+	public String addAtores(String nome) {
+		String res;
+		for(Ator ator:this.atores) {
+			if(nome.equalsIgnoreCase(ator.getNome())) {
+				res = "O ator já está presente no elenco";
+				return res;
+			}else {
+				res = "Ator adicionado no elenco";
+				return res;
+			}
+		}
+
 	}
-	public void addDiretores() {
-		
+
+	public void addDiretores(String nome) {
+		for (Diretor diretor : this.diretores) {
+			if (nome.equalsIgnoreCase(diretor.getNome())) {
+
+			}
+			;
+		}
 	}
 
 	public String getNome() {

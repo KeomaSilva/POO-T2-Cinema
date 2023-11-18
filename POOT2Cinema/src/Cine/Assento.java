@@ -21,26 +21,31 @@ public class Assento implements Serializable {
 
 	public String lugaresVagos() {
 		StringBuilder str = new StringBuilder();
-		str.append("");
-		for (int i = 11; i >= 1; i--) {
-			if(i == 11) {
-				str.append("Linhas  - ");
-			}else {
-				str.append("Linha " + "i" + " - ");				
-			}
-			for (int j = 0; j <= 10;) {
-				if(j==0) {
-					str.append("- O -");
-				}
-				if() {
-					str.append("- O -");
+		str.append("----- FUNDO -----\n");
+		for (int i = 9; i >= 0; i--) {
+			str.append("Linha " + i + ":");
+			for (int j = 1; j <= 10;) {
+				if (j < 10) {
+					String codigo = i + "" + j;
+					if (this.ingressos.containsKey(codigo)) {
+						str.append("- X -");
+					} else {
+						str.append("- " + i + "" + j);
+					}
 				} else {
-					str.append("- X -");
+					String codigo = i + 1 + "" + j;
+					if (this.ingressos.containsKey(codigo)) {
+						str.append("- X -");
+					} else {
+						str.append("- " + i + 1 + "0 -");
+					}
 				}
 			}
+			str.append("\n");
 		}
 		str.append("\n----- TELA -----");
 		return str.toString();
+
 	}
 
 	public Sala getSala() {
