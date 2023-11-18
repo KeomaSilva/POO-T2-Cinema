@@ -4,15 +4,21 @@ import java.io.Serializable;
 
 public class Sala implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private String numero;
+
+	private int numero;
 	private Assento lugares;
 
-	public String getNumero() {
+	public Sala(int numero) {
+		this.numero = numero;
+		this.lugares = new Assento(this);
+
+	}
+
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
