@@ -1,7 +1,9 @@
 package Cine;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Cinema implements Serializable {
@@ -14,7 +16,7 @@ public class Cinema implements Serializable {
 
 	public Cinema() {
 		salas = new LinkedHashSet<>();
-		filmes = new LinkedHashSet<>();
+		filmes = new HashSet<>();
 	}
 
 	public Cinema(String nome, String endereco, int nsalas) {
@@ -51,23 +53,28 @@ public class Cinema implements Serializable {
 		try {
 			if (possui) {
 				res = "Filme já presente no catálago";
-				
+
 			} else {
 				this.filmes.add(new Filme(nome));
 				res = "Filme adicionado ao catálago";
-				
-			}			
-		}catch(Exception e) {
-			this.filmes.add(new Filme(nome));
+
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
+			return res;
 		}
 		return res;
 	}
-	
-	public String removeFilme(Filme filme) {
-		String res = "";
-		
-		
+
+	public String removeFilme(Filme removeFilme) {
+		String res = "Filme não encontrado no banco de dados";
+		for (Filme filme : filmes) {
+			if (filme.equals(removeFilme)) {
+				filmes.remove(filme);
+				res = "Filme removido do catalago";
+			}
+		}
+
 		return res;
 	}
 
@@ -78,6 +85,16 @@ public class Cinema implements Serializable {
 		}
 		str.append("Total de " + filmes.size() + " cadastrados");
 		return str.toString();
+	}
+
+	public String filmesIndiceLista(int index) {
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i<filmes.size();) {
+			int index = filmes.IndexOf(filme);
+			str.append("");
+		}
+		return str.toString();
+
 	}
 
 	public void addSala() {
@@ -92,6 +109,23 @@ public class Cinema implements Serializable {
 		}
 		str.append("há um total de: " + salas.size() + " salas");
 		return str.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(filmes, salas);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cinema other = (Cinema) obj;
+		return Objects.equals(filmes, other.filmes) && Objects.equals(salas, other.salas);
 	}
 
 	public String getNome() {

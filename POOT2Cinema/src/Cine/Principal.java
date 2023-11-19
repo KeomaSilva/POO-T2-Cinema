@@ -59,7 +59,7 @@ public class Principal {
 	}
 
 	public void filmesCatalogo() {
-		System.out.println(cineUcs.getFilmes());
+		System.out.println(cineUcs.filmesIndiceLista());
 	}
 
 	public void menuCadastrar() {
@@ -149,8 +149,9 @@ public class Principal {
 		System.out.println("-----------------------");
 		filmesCatalogo();
 		System.out.println("1 - Adicionar filme ao Catálago");
-		System.out.println("2 - Alterar dados do filme");
+		System.out.println("2 - Alterar/Remover dados de filme em cartaz");
 		opcao = sc.nextInt();
+		sc.nextLine();
 		switch (opcao) {
 		case 1:
 			System.out.println("Adicionando file ao catálago");
@@ -159,9 +160,21 @@ public class Principal {
 			System.out.println(cineUcs.addFilme(res));
 			dadosFilmesCinema();
 		case 2:
-			System.out.println("Alterando dados do filme");
-			System.out.println("Selecione o filme");
-			menu();
+			System.out.println("--- Alterar/Remover dados de filme em cartaz ---");
+			System.out.println("1 - Alterando dados do filme em cartaz");
+			System.out.println("2 - Remover filme de cartaz");
+			System.out.println("3 - Cancelar e voltar ao menu inicial");
+			opcao = sc.nextInt();
+			switch (opcao) {
+			case 1:
+				System.out.println("Selecione o filme");
+				filmesCatalogo();
+
+			case 2:
+
+			case 3:
+				menu();
+			}
 
 		}
 

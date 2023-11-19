@@ -15,12 +15,14 @@ public class Filme implements Serializable {
 	private Set<Ator> atores;
 	private Set<Diretor> diretores;
 
-	public Filme(String nome) {
-		this.nome = nome;
+	public Filme() {
 		generos = new HashSet<>();
 		horarios = new HashSet<>();
 		atores = new HashSet<>();
-		diretores = new HashSet<>();
+		diretores = new HashSet<>();		
+	}
+	public Filme(String nome) {
+		this.nome = nome;
 	}
 
 	public void addHorarios(String data, String horario, Sala sala) {
