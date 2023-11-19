@@ -13,6 +13,7 @@ public class Principal {
 
 	public Principal() {
 		cineUcs = new Cinema();
+		resgatarDados();
 	}
 
 	public static void main(String[] args) {
@@ -21,8 +22,10 @@ public class Principal {
 	}
 
 	public void menu() {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		int opcao = 0;
+		
+		System.out.println(cineUcs);
 
 		do {
 			System.out.println("-----------------------");
@@ -33,7 +36,6 @@ public class Principal {
 			System.out.println("4 - Exit");
 			opcao = sc.nextInt();
 			sc.nextLine();
-			sc.close();
 			switch (opcao) {
 			case 1:
 				comprarIngresso();
@@ -43,9 +45,13 @@ public class Principal {
 			case 3:
 				menuCadastrar();
 			case 4:
+				System.out.println("-----------------------");
+				System.out.println("Sistema sendo finalizado e gravando dados");
+				gravarDados();
 				System.exit(4);
 			}
 		} while (opcao != 0);
+		sc.close();
 	}
 
 	public void comprarIngresso() {
@@ -76,12 +82,12 @@ public class Principal {
 				listarSalasCinema();
 			case 3:
 				dadosFilmesCinema();
-			case 4:
-				alterarDadosFilme();
-			case 5:
-				addAtorBanco();
-			case 6:
-				addDiretorBanco();
+//			case 4:
+//				alterarDadosFilme();
+//			case 5:
+//				addAtorBanco();
+//			case 6:
+//				addDiretorBanco();
 			}
 
 		} while (opcao != 0);
@@ -89,12 +95,13 @@ public class Principal {
 
 	public void dadosCinema() {
 		String res;
+		String s = "s";
 		String opcao = "a";
 		System.out.println("-----------------------");
 		System.out.println(cineUcs);
 		System.out.println("Alterar nome do Cinema? [S] sim / [N] não");
 		opcao = sc.nextLine();
-		if (opcao.toLowerCase() == "s") {
+		if (opcao.equalsIgnoreCase(s)) {
 			System.out.println("Altere o nome do cinema:");
 			res = sc.nextLine();
 			cineUcs.setNome(res);
@@ -102,7 +109,7 @@ public class Principal {
 		}
 		System.out.println("Alterar endereço do Cinema? [S] sim / [N] não");
 		opcao = sc.nextLine();
-		if (opcao.toLowerCase() == "s") {
+		if (opcao.equalsIgnoreCase(s)) {
 			System.out.println("Alter o endereço do cinema:");
 			res = sc.nextLine();
 			cineUcs.setEndereco(res);
@@ -114,13 +121,14 @@ public class Principal {
 
 	public void listarSalasCinema() {
 		String res;
+		String s = "s";
 		System.out.println("-----------------------");
 		System.out.println("- Salas do Cinema - ");
 		System.out.println(cineUcs.getSalas());
 		do {
 			System.out.println("Adicionar sala ao Cinema? [S] sim / [N] não");
 			res = sc.nextLine().toLowerCase();
-			if (res == "s") {
+			if (res.equalsIgnoreCase(s)) {
 				cineUcs.addSala();
 				System.out.println(gravarDados());
 				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
@@ -159,10 +167,10 @@ public class Principal {
 			file.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			gravarDados();
-			e.printStackTrace();
 			resgatarDados();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 		return "Dados resgatados com sucesso";
 	}
