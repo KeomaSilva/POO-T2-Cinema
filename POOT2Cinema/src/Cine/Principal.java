@@ -1,5 +1,10 @@
 package Cine;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Principal {
@@ -123,35 +128,55 @@ public class Principal {
 			}
 		} while (res == "s");
 	}
-	
+
 	public void dadosFilmesCinema() {
 		String res;
 		int opcao;
-		
+
 		System.out.println("-----------------------");
 		filmesCatalogo();
 		System.out.println("1 - Adicionar filme ao Catálago");
 		System.out.println("2 - Alterar dados do filme");
-		opcao=sc.nextInt();
-		switch(opcao) {
+		opcao = sc.nextInt();
+		switch (opcao) {
 		case 1:
 			System.out.println("Adicionando filem ao catálago");
 			System.out.println("Qual o nome do filme?");
-			res=sc.nextLine();
+			res = sc.nextLine();
 			cineUcs.addFilme(res);
-			
+
 		}
-		
-		
-		
+
 	}
-	
+
+	public String resgatarDados() {
+		try {
+			FileInputStream file = new FileInputStream("POOcineT2.dat");
+			ObjectInputStream oi = new ObjectInputStream(file);
+			Object o = oi.readObject();
+			cineUcs = (Cinema) o;
+			oi.close();
+			file.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			gravarDados();
+			e.printStackTrace();
+			resgatarDados();
+		}
+		return "Dados resgatados com sucesso";
+	}
 
 	public String gravarDados() {
 		try {
-
-		} catch (Exception e) {
-			// TODO: handle exception
+			FileOutputStream file = new FileOutputStream("POOcineT2.dat");
+			ObjectOutputStream ou = new ObjectOutputStream(file);
+			ou.writeObject(cineUcs);
+			ou.close();
+			file.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return "Dados não foram gravados";
 		}
 		return "Dados gravados com sucesso";
 	}
