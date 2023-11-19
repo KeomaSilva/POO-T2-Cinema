@@ -24,7 +24,7 @@ public class Principal {
 	public void menu() {
 		sc = new Scanner(System.in);
 		int opcao = 0;
-		
+
 		System.out.println(cineUcs);
 
 		do {
@@ -46,7 +46,7 @@ public class Principal {
 				menuCadastrar();
 			case 4:
 				System.out.println("-----------------------");
-				System.out.println("Sistema sendo finalizado e gravando dados");
+				System.out.println("Gravando dados e finalizado o sistema");
 				gravarDados();
 				System.exit(4);
 			}
@@ -59,7 +59,7 @@ public class Principal {
 	}
 
 	public void filmesCatalogo() {
-		cineUcs.getFilmes();
+		System.out.println(cineUcs.filmesIndiceLista());
 	}
 
 	public void menuCadastrar() {
@@ -82,12 +82,12 @@ public class Principal {
 				listarSalasCinema();
 			case 3:
 				dadosFilmesCinema();
-//			case 4:
-//				alterarDadosFilme();
-//			case 5:
-//				addAtorBanco();
-//			case 6:
-//				addDiretorBanco();
+			case 4:
+				alterarDadosFilme();
+			case 5:
+				addAtorBanco();
+			case 6:
+				addDiretorBanco();
 			}
 
 		} while (opcao != 0);
@@ -125,16 +125,21 @@ public class Principal {
 		System.out.println("-----------------------");
 		System.out.println("- Salas do Cinema - ");
 		System.out.println(cineUcs.getSalas());
-		do {
-			System.out.println("Adicionar sala ao Cinema? [S] sim / [N] não");
-			res = sc.nextLine().toLowerCase();
-			if (res.equalsIgnoreCase(s)) {
-				cineUcs.addSala();
-				System.out.println(gravarDados());
+		System.out.println("Adicionar sala ao Cinema? [S] sim / [N] não");
+		res = sc.nextLine().toLowerCase();
+		if (res.equalsIgnoreCase(s)) {
+			cineUcs.addSala();
+			System.out.println(gravarDados());
+			do {
 				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
 				res = sc.nextLine().toLowerCase();
-			}
-		} while (res == "s");
+				cineUcs.addSala();
+				System.out.println(gravarDados());
+			} while (res.equalsIgnoreCase(s));
+		}
+		System.out.println("Precione qualquer tecla para voltar ao menu inicial");
+		sc.nextLine();
+		menu();
 	}
 
 	public void dadosFilmesCinema() {
@@ -144,17 +149,47 @@ public class Principal {
 		System.out.println("-----------------------");
 		filmesCatalogo();
 		System.out.println("1 - Adicionar filme ao Catálago");
-		System.out.println("2 - Alterar dados do filme");
+		System.out.println("2 - Alterar/Remover dados de filme em cartaz");
 		opcao = sc.nextInt();
+		sc.nextLine();
 		switch (opcao) {
 		case 1:
-			System.out.println("Adicionando filem ao catálago");
+			System.out.println("Adicionando file ao catálago");
 			System.out.println("Qual o nome do filme?");
 			res = sc.nextLine();
-			cineUcs.addFilme(res);
+			System.out.println(cineUcs.addFilme(res));
+			dadosFilmesCinema();
+		case 2:
+			System.out.println("--- Alterar/Remover dados de filme em cartaz ---");
+			System.out.println("1 - Alterando dados do filme em cartaz");
+			System.out.println("2 - Remover filme de cartaz");
+			System.out.println("3 - Cancelar e voltar ao menu inicial");
+			opcao = sc.nextInt();
+			switch (opcao) {
+			case 1:
+				System.out.println("Selecione o filme");
+				filmesCatalogo();
+
+			case 2:
+
+			case 3:
+				menu();
+			}
 
 		}
 
+	}
+
+	public void alterarDadosFilme() {
+		menu();
+	}
+
+	public void addAtorBanco() {
+		menu();
+	}
+
+	public void addDiretorBanco() {
+		menu();
 	}
 
 	public String resgatarDados() {

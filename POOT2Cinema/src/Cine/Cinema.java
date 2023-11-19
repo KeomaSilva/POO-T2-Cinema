@@ -1,9 +1,10 @@
 package Cine;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Cinema implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +16,7 @@ public class Cinema implements Serializable {
 
 	public Cinema() {
 		salas = new LinkedHashSet<>();
-		filmes = new TreeSet<>();
+		filmes = new HashSet<>();
 	}
 
 	public Cinema(String nome, String endereco, int nsalas) {
@@ -27,6 +28,7 @@ public class Cinema implements Serializable {
 		}
 
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
@@ -38,23 +40,61 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
-	public void addFilme(String nome) {
+	public String addFilme(String nome) {
+		String res = "";
+		boolean possui = false;
+
 		for (Filme filme : filmes) {
 			if (filme.getNome() == nome) {
-				filmes.add(filme);
-			}else {
-				filmes.add(new Filme(nome));				
+				possui = true;
+				break;
 			}
 		}
+		try {
+			if (possui) {
+				res = "Filme já presente no catálago";
+
+			} else {
+				this.filmes.add(new Filme(nome));
+				res = "Filme adicionado ao catálago";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return res;
+		}
+		return res;
+	}
+
+	public String removeFilme(Filme removeFilme) {
+		String res = "Filme não encontrado no banco de dados";
+		for (Filme filme : filmes) {
+			if (filme.equals(removeFilme)) {
+				filmes.remove(filme);
+				res = "Filme removido do catalago";
+			}
+		}
+
+		return res;
 	}
 
 	public String getFilmes() {
 		StringBuilder str = new StringBuilder();
-		for(Filme filme:filmes) {
-			str.append(filme);
+		for (Filme filme : filmes) {
+			str.append(filme.getNome());
 		}
-		str.append("Total de "+filmes.size()+" cadastrados");
+		str.append("Total de " + filmes.size() + " cadastrados");
 		return str.toString();
+	}
+
+	public String filmesIndiceLista(int index) {
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i<filmes.size();) {
+			int index = filmes.IndexOf(filme);
+			str.append("");
+		}
+		return str.toString();
+
 	}
 
 	public void addSala() {
@@ -67,8 +107,25 @@ public class Cinema implements Serializable {
 		for (Sala sala : salas) {
 			str.append("Sala: " + sala.getNumero() + " - ");
 		}
-		str.append("há um total de: "+salas.size()+" salas");
+		str.append("há um total de: " + salas.size() + " salas");
 		return str.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(filmes, salas);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cinema other = (Cinema) obj;
+		return Objects.equals(filmes, other.filmes) && Objects.equals(salas, other.salas);
 	}
 
 	public String getNome() {
