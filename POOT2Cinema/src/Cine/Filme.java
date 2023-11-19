@@ -57,7 +57,7 @@ public class Filme implements Serializable {
 		}
 	}
 
-	public String detalhesFilme() {
+	public String toString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Filme: " + this.nome + " - ");
 		str.append("Ano: " + this.ano + "-");
@@ -81,10 +81,6 @@ public class Filme implements Serializable {
 		}
 
 		return str.toString();
-	}
-
-	public String toString() {
-		return this.nome;
 	}
 
 	public String getNome() {
