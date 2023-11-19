@@ -2,7 +2,6 @@ package Cine;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class Filme implements Serializable {
@@ -31,16 +30,21 @@ public class Filme implements Serializable {
 	}
 
 	public String addAtores(String nome) {
-		String res;
+		String res = "";
+		boolean possui = false;
 		for (Ator ator : this.atores) {
 			if (nome.equalsIgnoreCase(ator.getNome())) {
-				res = "O ator já está presente no elenco";
-				return res;
-			} else {
-				res = "Ator adicionado no elenco";
-				return res;
+				possui = true;
+				break;
 			}
 		}
+		if (possui) {
+			res = "O ator já está presente no elenco";
+		} else {
+			atores.add(new Ator(nome));
+			res = "Ator adicionado no elenco";
+		}
+		return res;
 
 	}
 
@@ -57,7 +61,7 @@ public class Filme implements Serializable {
 		StringBuilder str = new StringBuilder();
 		str.append("Filme: " + this.nome + " - ");
 		str.append("Ano: " + this.ano + "-");
-		str.append("Duração:"+this.duracao+" - ");
+		str.append("Duração:" + this.duracao + " - ");
 		str.append("Gênero: ");
 		for (Genero genero : generos) {
 			str.append(genero + " ,");
@@ -72,8 +76,8 @@ public class Filme implements Serializable {
 			str.append(diretor + " ,");
 		}
 		str.append("- Elenco: ");
-		for(Ator ator:atores) {
-			str.append(ator+" ,");
+		for (Ator ator : atores) {
+			str.append(ator + " ,");
 		}
 
 		return str.toString();
