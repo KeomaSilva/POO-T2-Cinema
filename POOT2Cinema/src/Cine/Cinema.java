@@ -1,7 +1,6 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +15,7 @@ public class Cinema implements Serializable {
 
 	public Cinema() {
 		salas = new LinkedHashSet<>();
-		filmes = new HashSet<>();
+		filmes = new LinkedHashSet<>();
 	}
 
 	public Cinema(String nome, String endereco, int nsalas) {
@@ -61,7 +60,6 @@ public class Cinema implements Serializable {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return res;
 		}
 		return res;
 	}
@@ -89,7 +87,7 @@ public class Cinema implements Serializable {
 
 	public String filmesIndiceLista(int index) {
 		StringBuilder str = new StringBuilder();
-		for (int i = 0; i<filmes.size();) {
+		for (int i = 0; i < filmes.size();) {
 			int index = filmes.IndexOf(filme);
 			str.append("");
 		}

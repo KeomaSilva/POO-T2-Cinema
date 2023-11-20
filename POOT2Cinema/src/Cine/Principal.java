@@ -201,11 +201,11 @@ public class Principal {
 			oi.close();
 			file.close();
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			System.out.println("O arquivo raiz não foi inicializado, será criado um arquivo vazio para isso.");
 			gravarDados();
 			resgatarDados();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("O programa não possui todas as classes para o inicio do arquivo raiz, não será possível executar-lo.");
 		}
 		return "Dados resgatados com sucesso";
 	}
