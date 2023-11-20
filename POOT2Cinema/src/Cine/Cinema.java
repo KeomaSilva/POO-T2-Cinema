@@ -44,7 +44,7 @@ public class Cinema implements Serializable {
 		boolean possui = false;
 
 		for (Filme filme : filmes) {
-			if (filme.getNome() == nome) {
+			if (filme.getNome().equalsIgnoreCase(nome)) {
 				possui = true;
 				break;
 			}
