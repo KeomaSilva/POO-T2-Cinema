@@ -1,28 +1,59 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Filme implements Serializable {
+public class Filme implements Serializable, Comparable<Filme> {
 	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String descricao;
 	private String duracao;
 	private String ano;
-	private Set<Genero> generos;
-	private Set<Horario> horarios;
-	private Set<Ator> atores;
-	private Set<Diretor> diretores;
+	private List<Genero> generos;
+	private List<Horario> horarios;
+	private List<Ator> atores;
+	private List<Diretor> diretores;
+	private List<Ingresso> ingressos;
 
 	public Filme() {
-		generos = new HashSet<>();
-		horarios = new HashSet<>();
-		atores = new HashSet<>();
-		diretores = new HashSet<>();		
+		generos = new ArrayList<>();
+		horarios = new ArrayList<>();
+		atores = new LinkedList<>();
+		diretores = new LinkedList<>();
+		ingressos = new ArrayList<>();
 	}
+
 	public Filme(String nome) {
 		this.nome = nome;
+	}
+
+	public String toString() {
+
+		StringBuilder str = new StringBuilder();
+		str.append("Filme: " + this.nome + " - ");
+		str.append("Ano: " + this.ano + "-");
+		str.append("Duração:" + this.duracao + " - ");
+		str.append("Gênero: ");
+		for (Genero genero : generos) {
+			str.append(genero + " ,");
+		}
+		str.append("- Horários: ");
+		for (Horario horario : horarios) {
+			str.append(horario + ", ");
+		}
+		str.append("- Sinapse: " + this.descricao + " - ");
+		str.append("Diretor(a): ");
+		for (Diretor diretor : diretores) {
+			str.append(diretor + " ,");
+		}
+		str.append("- Elenco: ");
+		for (Ator ator : atores) {
+			str.append(ator + " ,");
+		}
+
+		return str.toString();
 	}
 
 	public void addHorarios(String data, String horario, Sala sala) {
@@ -59,30 +90,33 @@ public class Filme implements Serializable {
 		}
 	}
 
-	public String toString() {
+	public String lugaresVagos() {
 		StringBuilder str = new StringBuilder();
-		str.append("Filme: " + this.nome + " - ");
-		str.append("Ano: " + this.ano + "-");
-		str.append("Duração:" + this.duracao + " - ");
-		str.append("Gênero: ");
-		for (Genero genero : generos) {
-			str.append(genero + " ,");
-		}
-		str.append("- Horários: ");
-		for (Horario horario : horarios) {
-			str.append(horario + ", ");
-		}
-		str.append("- Sinapse: " + this.descricao + " - ");
-		str.append("Diretor(a): ");
-		for (Diretor diretor : diretores) {
-			str.append(diretor + " ,");
-		}
-		str.append("- Elenco: ");
-		for (Ator ator : atores) {
-			str.append(ator + " ,");
-		}
-
+//		str.append("----- FUNDO -----\n");
+//		for (int i = 9; i >= 0; i--) {
+//			str.append("Linha " + i + ":");
+//			for (int j = 1; j <= 10;) {
+//				if (j < 10) {
+//					String codigo = i + "" + j;
+//					if (this.ingressos.containsKey(codigo)) {
+//						str.append("- X -");
+//					} else {
+//						str.append("- " + i + "" + j);
+//					}
+//				} else {
+//					String codigo = i + 1 + "" + j;
+//					if (this.ingressos.containsKey(codigo)) {
+//						str.append("- X -");
+//					} else {
+//						str.append("- " + i + 1 + "0 -");
+//					}
+//				}
+//			}
+//			str.append("\n");
+//		}
+		str.append("\n----- TELA -----");
 		return str.toString();
+
 	}
 
 	public String getNome() {
@@ -115,6 +149,11 @@ public class Filme implements Serializable {
 
 	public void setAno(String ano) {
 		this.ano = ano;
+	}
+
+	@Override
+	public int compareTo(Filme o) {
+		return this.nome.compareTo(o.nome);
 	}
 
 }

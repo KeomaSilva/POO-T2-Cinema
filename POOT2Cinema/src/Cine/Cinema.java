@@ -1,21 +1,21 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Cinema implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String endereco;
-	private Set<Filme> filmes;
-	private Set<Sala> salas;
+	private List<Filme> filmes;
+	private List<Sala> salas;
 
 	public Cinema() {
-		salas = new LinkedHashSet<>();
-		filmes = new LinkedHashSet<>();
+		salas = new ArrayList<>();
+		filmes = new ArrayList<>();
 	}
 
 	public Cinema(String nome, String endereco, int nsalas) {
@@ -85,11 +85,12 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
-	public String filmesIndiceLista(int index) {
+	public String filmesCatalago() {
 		StringBuilder str = new StringBuilder();
+		ordenarFilmes();
 		for (int i = 0; i < filmes.size();) {
-			int index = filmes.IndexOf(filme);
-			str.append("");
+			str.append(i + 1 + " - " + filmes.get(i).getNome());
+			str.append("\n");
 		}
 		return str.toString();
 
@@ -109,21 +110,8 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(filmes, salas);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cinema other = (Cinema) obj;
-		return Objects.equals(filmes, other.filmes) && Objects.equals(salas, other.salas);
+	private void ordenarFilmes() {
+		Collections.sort(filmes);
 	}
 
 	public String getNome() {
