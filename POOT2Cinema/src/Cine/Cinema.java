@@ -18,16 +18,6 @@ public class Cinema implements Serializable {
 		filmes = new ArrayList<>();
 	}
 
-	public Cinema(String nome, String endereco, int nsalas) {
-		this();
-		this.nome = nome;
-		this.endereco = endereco;
-		for (int i = 1; i <= nsalas;) {
-			salas.add(new Sala(i));
-		}
-
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
@@ -85,12 +75,42 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
+	public Filme selecionarFilme(int index) {
+		Filme x = null;
+		try{
+			for (int i = 0; i<filmes.size();i++) {
+				if ((i-1) == index) {
+					x = filmes.get(i - 1);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return x;
+	}
+
+	public String alterarDadosFilme(Filme filme) {
+		StringBuilder str = new StringBuilder();
+		if(filme!=null){
+			str.append("O filme selecionado foi: "+filme.getNome());
+		}else {
+			str.append("Não foi possível selecionar nenhum filme");
+		}
+		
+		return str.toString();
+	}
+
 	public String filmesCatalago() {
 		StringBuilder str = new StringBuilder();
 		ordenarFilmes();
-		for (int i = 0; i < filmes.size();) {
-			str.append(i + 1 + " - " + filmes.get(i).getNome());
-			str.append("\n");
+		if (filmes.size() > 0) {
+			for (int i = 0; i < filmes.size(); i++) {
+				String index = "" + (i + 1);
+				str.append(index + " - " + filmes.get(i).getNome());
+				str.append("\n");
+			}
+		} else {
+			str.append("Nenhum filme em cartaz.");
 		}
 		return str.toString();
 

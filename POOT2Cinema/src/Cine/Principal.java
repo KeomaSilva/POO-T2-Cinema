@@ -166,6 +166,9 @@ public class Principal {
 			case 1:
 				System.out.println("Selecione o filme");
 				System.out.println(cineUcs.filmesCatalago());
+				System.out.println("Digite o número correspondente do filme:");
+				opcao=sc.nextInt();
+				System.out.println(cineUcs.alterarDadosFilme(cineUcs.selecionarFilme(opcao)));
 
 			case 2:
 
