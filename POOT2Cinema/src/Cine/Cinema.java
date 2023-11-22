@@ -1,32 +1,21 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Cinema implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String endereco;
-	private Set<Filme> filmes;
-	private Set<Sala> salas;
+	private List<Filme> filmes;
+	private List<Sala> salas;
 
 	public Cinema() {
-		salas = new LinkedHashSet<>();
-		filmes = new HashSet<>();
-	}
-
-	public Cinema(String nome, String endereco, int nsalas) {
-		this();
-		this.nome = nome;
-		this.endereco = endereco;
-		for (int i = 1; i <= nsalas;) {
-			salas.add(new Sala(i));
-		}
-
+		salas = new ArrayList<>();
+		filmes = new ArrayList<>();
 	}
 
 	@Override
@@ -45,7 +34,7 @@ public class Cinema implements Serializable {
 		boolean possui = false;
 
 		for (Filme filme : filmes) {
-			if (filme.getNome() == nome) {
+			if (filme.getNome().equalsIgnoreCase(nome)) {
 				possui = true;
 				break;
 			}
@@ -61,7 +50,6 @@ public class Cinema implements Serializable {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return res;
 		}
 		return res;
 	}
@@ -87,11 +75,42 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
-	public String filmesIndiceLista(int index) {
+	public Filme selecionarFilme(int index) {
+		Filme x = null;
+		try{
+			for (int i = 0; i<filmes.size();i++) {
+				if ((i-1) == index) {
+					x = filmes.get(i - 1);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return x;
+	}
+
+	public String alterarDadosFilme(Filme filme) {
 		StringBuilder str = new StringBuilder();
-		for (int i = 0; i<filmes.size();) {
-			int index = filmes.IndexOf(filme);
-			str.append("");
+		if(filme!=null){
+			str.append("O filme selecionado foi: "+filme.getNome());
+		}else {
+			str.append("Não foi possível selecionar nenhum filme");
+		}
+		
+		return str.toString();
+	}
+
+	public String filmesCatalago() {
+		StringBuilder str = new StringBuilder();
+		ordenarFilmes();
+		if (filmes.size() > 0) {
+			for (int i = 0; i < filmes.size(); i++) {
+				String index = "" + (i + 1);
+				str.append(index + " - " + filmes.get(i).getNome());
+				str.append("\n");
+			}
+		} else {
+			str.append("Nenhum filme em cartaz.");
 		}
 		return str.toString();
 
@@ -111,21 +130,8 @@ public class Cinema implements Serializable {
 		return str.toString();
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(filmes, salas);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cinema other = (Cinema) obj;
-		return Objects.equals(filmes, other.filmes) && Objects.equals(salas, other.salas);
+	private void ordenarFilmes() {
+		Collections.sort(filmes);
 	}
 
 	public String getNome() {

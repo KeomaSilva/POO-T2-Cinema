@@ -40,7 +40,7 @@ public class Principal {
 			case 1:
 				comprarIngresso();
 			case 2:
-				filmesCatalogo();
+				System.out.println(cineUcs.filmesCatalago());
 				menu();
 			case 3:
 				menuCadastrar();
@@ -58,10 +58,6 @@ public class Principal {
 
 	}
 
-	public void filmesCatalogo() {
-		System.out.println(cineUcs.filmesIndiceLista());
-	}
-
 	public void menuCadastrar() {
 
 		int opcao = 0;
@@ -70,7 +66,7 @@ public class Principal {
 			System.out.println("----MENU CADASTRAR----");
 			System.out.println("1 - Dados do Cinema");
 			System.out.println("2 - Listar Salas do Cinema");
-			System.out.println("3 - Dados dos Filmes");
+			System.out.println("3 - Adicionar/Alterar Filmes em Cartaz");
 			System.out.println("4 - Adicionar Atores ao banco de dados");
 			System.out.println("5 - Adicionar diretores ao banco de dados");
 			opcao = sc.nextInt();
@@ -147,7 +143,7 @@ public class Principal {
 		int opcao;
 
 		System.out.println("-----------------------");
-		filmesCatalogo();
+		System.out.println(cineUcs.filmesCatalago());
 		System.out.println("1 - Adicionar filme ao Catálago");
 		System.out.println("2 - Alterar/Remover dados de filme em cartaz");
 		opcao = sc.nextInt();
@@ -158,6 +154,7 @@ public class Principal {
 			System.out.println("Qual o nome do filme?");
 			res = sc.nextLine();
 			System.out.println(cineUcs.addFilme(res));
+			gravarDados();
 			dadosFilmesCinema();
 		case 2:
 			System.out.println("--- Alterar/Remover dados de filme em cartaz ---");
@@ -168,7 +165,10 @@ public class Principal {
 			switch (opcao) {
 			case 1:
 				System.out.println("Selecione o filme");
-				filmesCatalogo();
+				System.out.println(cineUcs.filmesCatalago());
+				System.out.println("Digite o número correspondente do filme:");
+				opcao=sc.nextInt();
+				System.out.println(cineUcs.alterarDadosFilme(cineUcs.selecionarFilme(opcao)));
 
 			case 2:
 
@@ -201,11 +201,11 @@ public class Principal {
 			oi.close();
 			file.close();
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			System.out.println("O arquivo raiz não foi inicializado, será criado um arquivo vazio para isso.");
 			gravarDados();
 			resgatarDados();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("O programa não possui todas as classes para o inicio do arquivo raiz, não será possível executar-lo.");
 		}
 		return "Dados resgatados com sucesso";
 	}
