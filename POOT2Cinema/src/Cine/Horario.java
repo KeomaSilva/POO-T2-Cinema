@@ -2,7 +2,7 @@ package Cine;
 
 import java.io.Serializable;
 
-public class Horario implements Serializable {
+public class Horario implements Serializable, Comparable<Horario> {
 	private static final long serialVersionUID = 1L;
 	private String data;
 	private String horario;
@@ -39,6 +39,10 @@ public class Horario implements Serializable {
 
 	public void setSala(Sala sala) {
 		this.sala = sala;
+	}
+	@Override
+	public int compareTo(Horario o) {
+		return this.data.compareToIgnoreCase(o.data);
 	}
 
 }

@@ -21,7 +21,6 @@ public class Cinema implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("------------------");
 		str.append("Nome: " + this.nome);
 		str.append(" - Endereço: " + this.endereco);
 		str.append(" - Quantidades de filmes em cartaz: " + this.filmes.size());
@@ -55,15 +54,10 @@ public class Cinema implements Serializable {
 	}
 
 	public String removeFilme(Filme removeFilme) {
-		String res = "Filme não encontrado no banco de dados";
-		for (Filme filme : filmes) {
-			if (filme.equals(removeFilme)) {
-				filmes.remove(filme);
-				res = "Filme removido do catalago";
-			}
-		}
 
-		return res;
+		filmes.remove(removeFilme);
+		return "Filme removido do catalago";
+
 	}
 
 	public String getFilmes() {
@@ -77,32 +71,22 @@ public class Cinema implements Serializable {
 
 	public Filme selecionarFilme(int index) {
 		Filme x = null;
-		try{
-			for (int i = 0; i<filmes.size();i++) {
-				if ((i-1) == index) {
-					x = filmes.get(i - 1);
+		Collections.sort(filmes);
+		try {
+			for (int i = 0; i < filmes.size(); i++) {
+				if (i == index - 1) {
+					x = filmes.get(i);
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return x;
 	}
 
-	public String alterarDadosFilme(Filme filme) {
-		StringBuilder str = new StringBuilder();
-		if(filme!=null){
-			str.append("O filme selecionado foi: "+filme.getNome());
-		}else {
-			str.append("Não foi possível selecionar nenhum filme");
-		}
-		
-		return str.toString();
-	}
-
 	public String filmesCatalago() {
 		StringBuilder str = new StringBuilder();
-		ordenarFilmes();
+		Collections.sort(filmes);
 		if (filmes.size() > 0) {
 			for (int i = 0; i < filmes.size(); i++) {
 				String index = "" + (i + 1);
@@ -124,14 +108,41 @@ public class Cinema implements Serializable {
 	public String getSalas() {
 		StringBuilder str = new StringBuilder();
 		for (Sala sala : salas) {
-			str.append("Sala: " + sala.getNumero() + " - ");
+			str.append("Sala: " + sala.getNome() + " - ");
 		}
 		str.append("há um total de: " + salas.size() + " salas");
 		return str.toString();
 	}
 
-	private void ordenarFilmes() {
-		Collections.sort(filmes);
+	public String listarSalas() {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(salas);
+		for (int i = 0; i < salas.size(); i++) {
+			String index = "" + (i + 1);
+			str.append(index + " - Sala: " + salas.get(i));
+			str.append("\n");
+		}
+		return str.toString();
+	}
+	public String removeSala(Sala sala) {
+		salas.remove(sala);
+		return "Sala removida com sucesso";
+		
+	}
+
+	public Sala selecionarSala(int index) {
+		Sala x = null;
+		Collections.sort(salas);
+		try {
+			for (int i = 0; i < salas.size(); i++) {
+				if (i == index - 1) {
+					x = salas.get(i);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return x;
 	}
 
 	public String getNome() {
