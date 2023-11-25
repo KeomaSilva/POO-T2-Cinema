@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Principal {
 	private static Scanner sc;
 	private Cinema cineUcs;
+	public int ingressos=0;
+	public int meia=0;
 
 	public Principal() {
 		cineUcs = new Cinema();
@@ -52,15 +54,17 @@ public class Principal {
 		sc.close();
 	}
 
-	public void comprarIngresso() {
+		public void comprarIngresso() {
+		System.out.println(cineUcs.filmesCatalago());
+		System.out.println("Selecione o filme: ");
+		sc.next();
+		//lê sala
 		mostrarAssentos();
-
 	}
 	
 	public void mostrarAssentos() {
 		int l, poltrona, reserva;
 		poltrona=-1;
-		reserva=45;
 		for(l=0;l<10;l++) {
 			System.out.println((l + "0") + " " + (l + "1") + " " + (l + "2") + " " + (l + "3") 
 					+ " " + (l + "4") + " " + (l + "5") + " " + (l + "6")
@@ -68,7 +72,7 @@ public class Principal {
 		}
 		System.out.println("escolha a poltrona desejada");
 		poltrona = Integer.parseInt(sc.next());
-		//lê arquivos das poltronas ja reservadas
+		reserva=45;//lê arquivos das poltronas ja reservadas
 		while(poltrona==reserva) {
 			System.out.println("poltrona ja reservada");
 			System.out.println("escolha outra poltrona desejada");
@@ -79,9 +83,27 @@ public class Principal {
 			System.out.println("escolha outra poltrona desejada");
 			poltrona = Integer.parseInt(sc.next());
 		}
-			reserva = poltrona;
-			gravarDados();
+		System.out.println("Você possui desconto?");
+		String desconto = sc.next();
+		if(desconto.equalsIgnoreCase("s")) {
+			meia++;
+		} else {
+			ingressos++;
+		}
+		reserva = poltrona;
+		
+		gravarDados();
+		System.out.println("Gostaria de comprar outro ingresso?");
+		String opcao = sc.next();
+		if(opcao.equalsIgnoreCase("s")) {
+			mostrarAssentos();
+		} else {
+			System.out.println("O total ficou " + ((ingressos * 26) + (meia * 13)));
+			System.out.println("Voltando ao menu");
+			menu();
+		}
 	}
+
 
 	public void menuCadastrar() {
 
