@@ -109,7 +109,7 @@ public class Principal {
 			cineUcs.setEndereco(res);
 			System.out.println(gravarDados());
 		}
-		
+
 		System.out.println("Retornando para o menu principal");
 		menu();
 	}
@@ -174,12 +174,7 @@ public class Principal {
 			gravarDados();
 			dadosFilmesCinema();
 		case 2:
-			System.out.println("-----------------------");
-			System.out.println("Selecione o filme");
-			System.out.println(cineUcs.filmesCatalago());
-			System.out.println("Digite o número correspondente do filme:");
-			opcao = sc.nextInt();
-			alterarDadosFilme(cineUcs.selecionarFilme(opcao));
+			alterarDadosFilme();
 			gravarDados();
 			dadosFilmesCinema();
 		case 3:
@@ -197,10 +192,20 @@ public class Principal {
 
 	}
 
-	public void alterarDadosFilme(Filme filme) {
+	public void alterarDadosFilme() {
 		int opcao = 0;
 		int subOpcao = 0;
 		String res;
+		Filme filme;
+
+		System.out.println("-----------------------");
+		System.out.println("Selecione o filme");
+		System.out.println(cineUcs.filmesCatalago());
+		System.out.println("Digite o número correspondente do filme:");
+		opcao = sc.nextInt();
+		filme = cineUcs.selecionarFilme(opcao);
+		gravarDados();
+		dadosFilmesCinema();
 		if (filme != null) {
 			System.out.println("O filme selecionado foi:" + filme.getNome());
 			do {
@@ -229,6 +234,7 @@ public class Principal {
 					System.out.println("Digite a nova duração do filme");
 					filme.setDuracao(sc.nextLine());
 					opcao = 0;
+					alterarDadosFilme();
 				case 3:
 					System.out.println("-----------------------");
 					System.out.println("Digite o ano do filme");
@@ -325,7 +331,7 @@ public class Principal {
 		{
 			System.out.println("-----------------------");
 			System.out.println("Não foi possível selecionar nenhum filme");
-			menu();
+			menuCadastrar();
 		}
 
 	}
