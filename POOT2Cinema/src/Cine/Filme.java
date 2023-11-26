@@ -12,7 +12,6 @@ public class Filme implements Serializable, Comparable<Filme> {
 	private String descricao;
 	private String duracao;
 	private String ano;
-	private Genero genero;
 	private List<Genero> generos;
 	private List<Horario> horarios;
 	private List<Ator> atores;
@@ -59,45 +58,37 @@ public class Filme implements Serializable, Comparable<Filme> {
 		return str.toString();
 	}
 
-	public String listarGeneros() {
+	public String getGeneros() {
 		StringBuilder str = new StringBuilder();
 		Collections.sort(generos);
-		for (int i = 0; i < generos.size(); i++) {
-			String index = "" + (i + 1);
-			str.append(index + " - " + generos.get(i).getNome());
-			str.append("\n");
-		}
-
-		return str.toString();
-	}
-
-	public String setGenero(int id) {
-		StringBuilder str = new StringBuilder();
-		Collections.sort(generos);
-		str.append("Gênero selecionado: " + generos.get(id - 1).getNome());
-		this.genero = generos.get(id - 1);
-		str.append("Gênero alterado");
-		return str.toString();
-
-	}
-
-	public String addGeneroALista(String nome) {
-		String res = "";
-		boolean possui = false;
-		Collections.sort(generos);
-		for (Genero genero : generos) {
-			if (genero.getNome().equalsIgnoreCase(nome)) {
-				possui = true;
-				break;
+		str.append("Gênero: ");
+		if (generos == null) {
+			str.append("Lista vazia");
+		} else {
+			for (Genero genero : generos) {
+				str.append(genero.getNome() + ", ");
 			}
 		}
-		if (possui) {
-			res = "O gênero já está presente na lista";
+
+		return str.toString();
+
+	}
+
+	public String setGenero(Genero genero) {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(generos);
+		if (generos.contains(genero)) {
+			str.append("Gênero já presente na lista");
+			str.append("Retornando ao menu anterior");
 		} else {
-			generos.add(new Genero(nome));
-			res = "Gênero adicionado a lista de gêneros";
+			generos.add(genero);
+			str.append("Gênero adicionado à lista");
+			str.append("Gênero selecionado: " + genero.getNome());
+			str.append("Gênero alterado");
 		}
-		return res;
+
+		return str.toString();
+
 	}
 
 	public String listarHorarios() {
@@ -243,10 +234,6 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	public void setAno(String ano) {
 		this.ano = ano;
-	}
-
-	public Genero getGenero() {
-		return genero;
 	}
 
 	@Override

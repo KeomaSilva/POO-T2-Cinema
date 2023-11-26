@@ -12,10 +12,12 @@ public class Cinema implements Serializable {
 	private String endereco;
 	private List<Filme> filmes;
 	private List<Sala> salas;
+	private DataBase database;
 
 	public Cinema() {
 		salas = new ArrayList<>();
 		filmes = new ArrayList<>();
+		database = new DataBase();
 	}
 
 	@Override
@@ -185,4 +187,9 @@ public class Cinema implements Serializable {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	public DataBase getDatabase() {
+		return database;
+	}
+
 }
