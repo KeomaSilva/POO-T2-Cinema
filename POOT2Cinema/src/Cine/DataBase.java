@@ -47,7 +47,7 @@ public class DataBase implements Serializable {
 		} else {
 			for (int i = 0; i < generosDataBase.size(); i++) {
 				String index = "" + (i + 1);
-				str.append(index + ": " + generosDataBase.get(i).getNome()+"  - ");
+				str.append(index + ": " + generosDataBase.get(i).getNome() + "  - ");
 			}
 		}
 		return str.toString();
@@ -57,13 +57,114 @@ public class DataBase implements Serializable {
 		Collections.sort(generosDataBase);
 		Genero x;
 		try {
-			x = generosDataBase.get(index-1);
+			x = generosDataBase.get(index - 1);
 		} catch (Exception e) {
 			System.out.println("retornou genero null");
 			x = null;
 
 		}
 		return x;
+	}
+
+	public String adicionarAtoresALista(String nome) {
+		StringBuilder str = new StringBuilder();
+		boolean possui = false;
+		Collections.sort(atoresDataBase);
+		for (Ator ator : atoresDataBase) {
+			if (ator.getNome().equalsIgnoreCase(nome)) {
+				possui = true;
+				str.append("Ator já presente na lista");
+				break;
+			}
+
+		}
+		if (!possui) {
+			atoresDataBase.add(new Ator(nome));
+			str.append("Ator adicionado à lista");
+		}
+
+		return str.toString();
+
+	}
+
+	public String listarAtores() {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(atoresDataBase);
+		if (atoresDataBase == null) {
+			str.append("Nenhum ator cadastrado");
+		} else {
+			for (int i = 0; i < atoresDataBase.size(); i++) {
+				String index = "" + (i + 1);
+				str.append(index + ": " + atoresDataBase.get(i).getNome() + "  - ");
+			}
+		}
+
+		return str.toString();
+
+	}
+
+	public Ator selecionarAtoresDaLista(int index) {
+		Collections.sort(atoresDataBase);
+		Ator x;
+		try {
+			x = atoresDataBase.get(index - 1);
+		} catch (Exception e) {
+			System.out.println("retornou ator null");
+			x = null;
+
+		}
+		return x;
+
+	}
+
+	public String adicionarDiretorALista(String nome) {
+		StringBuilder str = new StringBuilder();
+		boolean possui = false;
+		Collections.sort(diretoresDataBase);
+		for (Diretor diretor : diretoresDataBase) {
+			if (diretor.getNome().equalsIgnoreCase(nome)) {
+				possui = true;
+				str.append("Diretor já presente na lista");
+				break;
+			}
+
+		}
+		if (!possui) {
+			diretoresDataBase.add(new Diretor(nome));
+			str.append("Diretor adicionado à lista");
+		}
+
+		return str.toString();
+
+	}
+
+	public String listarDiretores() {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(diretoresDataBase);
+		if (diretoresDataBase == null) {
+			str.append("Nenhum diretor cadastrado");
+		} else {
+			for (int i = 0; i < diretoresDataBase.size(); i++) {
+				String index = "" + (i + 1);
+				str.append(index + ": " + diretoresDataBase.get(i).getNome() + "  - ");
+			}
+		}
+
+		return str.toString();
+	}
+
+	public Diretor selecionarDiretorDaLista(int index) {
+		Collections.sort(diretoresDataBase);
+		Diretor x;
+		try {
+			x = diretoresDataBase.get(index - 1);
+		} catch (Exception e) {
+			System.out.println("retornou diretor null");
+			x = null;
+
+		}
+		return x;
+
 	}
 
 	public List<Genero> getGenerosDataBase() {

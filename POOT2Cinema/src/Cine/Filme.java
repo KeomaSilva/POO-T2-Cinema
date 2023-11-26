@@ -189,41 +189,172 @@ public class Filme implements Serializable, Comparable<Filme> {
 		return res;
 	}
 
-	public String addAtores(String nome) {
-		String res = "";
-		boolean possui = false;
-		for (Ator ator : atores) {
-			if (nome.equalsIgnoreCase(ator.getNome())) {
-				possui = true;
-				break;
+	public String getElenco() {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(atores);
+		str.append("Elenco: ");
+		if (atores == null) {
+			str.append("Lista vazia");
+		} else {
+			for (Ator ator : atores) {
+				str.append(ator.getNome() + "\n");
 			}
 		}
-		if (possui) {
-			res = "O ator já está presente no elenco";
-		} else {
-			atores.add(new Ator(nome));
-			res = "Ator adicionado ao elenco";
-		}
-		return res;
+
+		return str.toString();
 
 	}
 
-	public String addDiretores(String nome) {
-		String res = "";
-		boolean possui = false;
-		for (Diretor diretor : this.diretores) {
-			if (nome.equalsIgnoreCase(diretor.getNome())) {
-				possui = true;
-				break;
+	public String listarElencoFilme() {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(atores);
+			for (int i = 0; i < atores.size(); i++) {
+				str.append(i + 1 + ": " + atores.get(i).getNome());
+				str.append("\n");
+			}
+
+		} catch (Exception e) {
+
+		}
+		return str.toString();
+	}
+
+	public String setElenco(Ator ator) {
+		StringBuilder str = new StringBuilder();
+		try {
+			if (generos == null) {
+				atores.add(ator);
+				str.append("Ator adicionado");
+			} else {
+				Collections.sort(atores);
+				int count = 0;
+				if (atores.size() == 0) {
+					atores.add(ator);
+					str.append("Ator selecionado: " + ator.getNome());
+					str.append("Ator adicionado à lista");
+				} else {
+					for (Ator a : atores) {
+						if (a.getNome().equalsIgnoreCase(ator.getNome())) {
+							str.append("Ator já presente na lista");
+							count++;
+							break;
+						}
+					}
+				}
+				if (count == 0) {
+					atores.add(ator);
+					str.append("Ator selecionado: " + ator.getNome());
+					str.append("Ator adicionado à lista");
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return str.toString();
+
+	}
+
+	public String removeAtores(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(atores);
+			atores.remove(index - 1);
+			str.append("Ator removido do filme");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
+
+	}
+
+	public String getDiretores() {
+		StringBuilder str = new StringBuilder();
+		Collections.sort(diretores);
+		str.append("Direrores: ");
+		if (diretores == null) {
+			str.append("Lista vazia");
+		} else {
+			for (Diretor diretor : diretores) {
+				str.append(diretor.getNome() + "\n");
 			}
 		}
-		if (possui) {
-			res = "Dirtetor já está presenta na lista";
-		} else {
-			diretores.add(new Diretor(nome));
-			res = "Diretor adicionado ao filme";
+
+		return str.toString();
+
+	}
+
+	public String listarDiretorFilme() {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(diretores);
+			for (int i = 0; i < diretores.size(); i++) {
+				str.append(i + 1 + ": " + diretores.get(i).getNome());
+				str.append("\n");
+			}
+
+		} catch (Exception e) {
+
 		}
-		return res;
+		return str.toString();
+	}
+
+	public String setDiretor(Diretor diretor) {
+		StringBuilder str = new StringBuilder();
+		try {
+			if (generos == null) {
+				diretores.add(diretor);
+				str.append("Diretor adicionado");
+			} else {
+				Collections.sort(diretores);
+				int count = 0;
+				if (diretores.size() == 0) {
+					diretores.add(diretor);
+					str.append("Diretor selecionado: " + diretor.getNome());
+					str.append("Diretor adicionado à lista");
+				} else {
+					for (Diretor d : diretores) {
+						if (d.getNome().equalsIgnoreCase(diretor.getNome())) {
+							str.append("Diretor já presente na lista");
+							count++;
+							break;
+						}
+					}
+				}
+				if (count == 0) {
+					diretores.add(diretor);
+					str.append("Diretor selecionado: " + diretor.getNome());
+					str.append("Diretor adicionado à lista");
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return str.toString();
+
+	}
+
+	public String removeDiretor(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(diretores);
+			diretores.remove(index - 1);
+			str.append("Diretor removido do filme");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
+
 	}
 
 	public String lugaresVagos() {
@@ -264,6 +395,9 @@ public class Filme implements Serializable, Comparable<Filme> {
 	}
 
 	public String getDescricao() {
+		if (descricao == null) {
+			return "Não foi cadastrado Sinapse do filme";
+		}
 		return descricao;
 	}
 
