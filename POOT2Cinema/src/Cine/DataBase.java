@@ -65,6 +65,20 @@ public class DataBase implements Serializable {
 		}
 		return x;
 	}
+	public String removeGenerosBanco(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(generosDataBase);
+			generosDataBase.remove(index - 1);
+			str.append("Gênero removido do danco de dados");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
+	}
 
 	public String adicionarAtoresALista(String nome) {
 		StringBuilder str = new StringBuilder();
@@ -116,6 +130,21 @@ public class DataBase implements Serializable {
 		return x;
 
 	}
+	
+	public String removeAtoresBanco(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(atoresDataBase);
+			atoresDataBase.remove(index - 1);
+			str.append("Ator removido do danco de dados");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
+	}
 
 	public String adicionarDiretorALista(String nome) {
 		StringBuilder str = new StringBuilder();
@@ -165,6 +194,20 @@ public class DataBase implements Serializable {
 		}
 		return x;
 
+	}
+	public String removeDiretorBanco(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(diretoresDataBase);
+			diretoresDataBase.remove(index - 1);
+			str.append("Diretor removido do danco de dados");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
 	}
 
 	public List<Genero> getGenerosDataBase() {
