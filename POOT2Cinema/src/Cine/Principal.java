@@ -256,7 +256,7 @@ public class Principal {
 							System.out.println("Gêneros do filme: " + filme.getGeneros());
 							System.out.println("Selecione o gênero do filme");
 							System.out.println(cineUcs.getDatabase().listarGeneros());
-							System.out.println("0 - Caso não tenha o gênero que procura e queira adicionar um gênero.");
+							System.out.println("0 - Caso não tenha o gênero que procura (Adicionar ao Banco de Dados)");
 							subOpcao = sc.nextInt();
 							sc.nextLine();
 							if (subOpcao == 0) {
@@ -272,7 +272,7 @@ public class Principal {
 							System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
 							res = sc.nextLine();
 						} while (res.equalsIgnoreCase("s"));
-						alterarDadosFilme();
+						opcao = 0;
 					}
 					if (escolha == 2) {
 						do {
@@ -288,18 +288,26 @@ public class Principal {
 						} while (res.equalsIgnoreCase("s"));
 
 						System.out.println(gravarDados());
-						alterarDadosFilme();
+						opcao = 0;
 					}
 					if (escolha == 3) {
-						alterarDadosFilme();
+						opcao = 0;
 					}
 				}
 				if (opcao == 5) {
 					System.out.println("-----------------------");
-					System.out.println("Digite a sinapse do filme");
-					filme.setDuracao(sc.nextLine());
-					System.out.println(gravarDados());
-					opcao = 0;
+					System.out.println("Sinapse atual: ");
+					System.out.println(filme.getDescricao());
+					System.out.println("Alterar a Sinapse do Filme? [S] - sim / [N] não");
+					res = sc.nextLine();
+					if (res.equalsIgnoreCase("s")) {
+						System.out.println("Digite a sinapse do filme");
+						filme.setDescricao(sc.nextLine());
+						System.out.println(gravarDados());
+						opcao = 0;
+					} else {
+						opcao = 0;
+					}
 				}
 				if (opcao == 6) {
 					System.out.println("-----------------------");
@@ -349,14 +357,113 @@ public class Principal {
 				}
 				if (opcao == 7) {
 					System.out.println("-----------------------");
-					System.out.println("7 - Elenco do Filme");
+					int escolha;
+					subOpcao = 0;
+					System.out.println(filme.getElenco());
+					System.out.println("Selecione a opção:");
+					System.out.println("1 - Adicionar Ator/Atriz ao elenco");
+					System.out.println("2 - Remover Ator/Atriz ao elenco");
+					System.out.println("3 - Retornar ao menu anterior");
+					escolha = sc.nextInt();
+					sc.nextLine();
+					if (escolha == 1) {
+						do {
+							System.out.println(cineUcs.getDatabase().listarAtores());
+							System.out.println(
+									"0 - Caso não tenha o ator/atriz que procura (adicionar ao Banco de Dados)");
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							if (subOpcao == 0) {
+								System.out.println("Digite o nome do ator/atriz que queira adicionar");
+								res = sc.nextLine();
+								System.out.println(cineUcs.getDatabase().adicionarAtoresALista(res));
+								gravarDados();
+							} else {
+								System.out.println(
+										filme.setElenco(cineUcs.getDatabase().selecionarAtoresDaLista(subOpcao)));
+								gravarDados();
+							}
+							System.out.println("Adicionar outro ator/atriz ao elenco? [S] sim / [N] não");
+							res = sc.nextLine();
+						} while (res.equalsIgnoreCase("s"));
+						opcao = 0;
+					}
+					if (escolha == 2) {
+						do {
+							System.out.println("Selecione o ator/atriz do elenco");
+							System.out.println(filme.listarElencoFilme());
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							System.out.println(filme.removeAtores(subOpcao));
+							gravarDados();
+							System.out.println("Remover outro ator/atriz do elenco? [S] sim / [N] não");
+							res = sc.nextLine();
+
+						} while (res.equalsIgnoreCase("s"));
+
+						System.out.println(gravarDados());
+						opcao = 0;
+					}
+					if (escolha == 3) {
+						opcao = 0;
+					}
 
 					opcao = 0;
 
 				}
 				if (opcao == 8) {
 					System.out.println("-----------------------");
-					System.out.println("8 - Diretores do filme");
+					int escolha;
+					subOpcao = 0;
+					System.out.println(filme.getDiretores());
+					System.out.println("Selecione a opção:");
+					System.out.println("1 - Adicionar diretor ao filme");
+					System.out.println("2 - Remover diretor ao filme");
+					System.out.println("3 - Retornar ao menu anterior");
+					escolha = sc.nextInt();
+					sc.nextLine();
+					if (escolha == 1) {
+						do {
+							System.out.println(cineUcs.getDatabase().listarDiretores());
+							System.out.println(
+									"0 - Caso não tenha o diretor que procura (adicionar ao Banco de Dados)");
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							if (subOpcao == 0) {
+								System.out.println("Digite o nome do diretor que queira adicionar");
+								res = sc.nextLine();
+								System.out.println(cineUcs.getDatabase().adicionarDiretorALista(res));
+								gravarDados();
+							} else {
+								System.out.println(
+										filme.setDiretor(cineUcs.getDatabase().selecionarDiretorDaLista(subOpcao)));
+								gravarDados();
+							}
+							System.out.println("Adicionar outro diretor ao filme? [S] sim / [N] não");
+							res = sc.nextLine();
+						} while (res.equalsIgnoreCase("s"));
+						opcao = 0;
+					}
+					if (escolha == 2) {
+						do {
+							System.out.println("Selecione o diretor do filme");
+							System.out.println(filme.listarDiretorFilme());
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							System.out.println(filme.removeDiretor(subOpcao));
+							gravarDados();
+							System.out.println("Remover outro diretor do filme? [S] sim / [N] não");
+							res = sc.nextLine();
+
+						} while (res.equalsIgnoreCase("s"));
+
+						System.out.println(gravarDados());
+						opcao = 0;
+					}
+					if (escolha == 3) {
+						opcao = 0;
+					}
+
 					opcao = 0;
 
 				}
