@@ -22,9 +22,9 @@ public class Cinema implements Serializable {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Nome: " + this.nome);
-		str.append(" - Endereço: " + this.endereco);
-		str.append(" - Quantidades de filmes em cartaz: " + this.filmes.size());
-		str.append(" - Quantidade de salas: " + this.salas.size());
+		str.append("\nEndereço: " + this.endereco);
+		str.append("\nQuantidades de filmes em cartaz: " + this.filmes.size());
+		str.append("\nQuantidade de salas: " + this.salas.size());
 		return str.toString();
 	}
 
@@ -54,7 +54,7 @@ public class Cinema implements Serializable {
 	}
 
 	public String removeFilme(Filme removeFilme) {
-
+		Collections.sort(filmes);
 		filmes.remove(removeFilme);
 		return "Filme removido do catalago";
 
@@ -101,12 +101,35 @@ public class Cinema implements Serializable {
 	}
 
 	public void addSala() {
-		int index = this.salas.size();
-		this.salas.add(new Sala(index + 1));
+		Collections.sort(salas);
+		int count = 0;
+		try {
+			if (salas.size() == 0) {
+				this.salas.add(new Sala(0));
+			} else {
+				for (int i = 0; i < salas.size(); i++) {
+					if (salas.get(i).getNumero() == i + 1) {
+						count++;
+					}
+					if (count == i) {
+						this.salas.add(new Sala(i + 1));
+						break;
+					}
+					if (count == salas.size()) {
+						this.salas.add(new Sala(count + 1));
+						break;
+					}
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getSalas() {
 		StringBuilder str = new StringBuilder();
+		Collections.sort(salas);
 		for (Sala sala : salas) {
 			str.append("Sala: " + sala.getNome() + " - ");
 		}
@@ -124,10 +147,12 @@ public class Cinema implements Serializable {
 		}
 		return str.toString();
 	}
+
 	public String removeSala(Sala sala) {
+		Collections.sort(salas);
 		salas.remove(sala);
 		return "Sala removida com sucesso";
-		
+
 	}
 
 	public Sala selecionarSala(int index) {

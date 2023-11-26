@@ -102,6 +102,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	public String listarHorarios() {
 		StringBuilder str = new StringBuilder();
+		Collections.sort(horarios);
 		for (int i = 0; i < horarios.size(); i++) {
 			String index = "" + (i + 1);
 			str.append(index + " - Data: " + horarios.get(i).getData() + " - " + horarios.get(i).getHorario()
@@ -134,6 +135,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	public String removeHorario(Horario removeHorario) {
 		String res = "";
+		Collections.sort(horarios);
 		if (removeHorario != null) {
 			for (Horario horario : horarios) {
 				if (horario.equals(removeHorario)) {
