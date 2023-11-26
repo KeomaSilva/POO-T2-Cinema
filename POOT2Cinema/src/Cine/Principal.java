@@ -161,8 +161,7 @@ public class Principal {
 		System.out.println("4 - Retornar ao menu cadastrar");
 		opcao = sc.nextInt();
 		sc.nextLine();
-		switch (opcao) {
-		case 1:
+		if (opcao == 1) {
 			System.out.println("-----------------------");
 			System.out.println("Adicionando filme ao catálago");
 			System.out.println("Qual o nome do filme?");
@@ -170,9 +169,11 @@ public class Principal {
 			System.out.println(cineUcs.addFilme(res));
 			gravarDados();
 			dadosFilmesCinema();
-		case 2:
+		}
+		if (opcao == 2) {
 			alterarDadosFilme();
-		case 3:
+		}
+		if (opcao == 3) {
 			System.out.println("-----------------------");
 			System.out.println("Selecione o filme");
 			System.out.println(cineUcs.filmesCatalago());
@@ -181,10 +182,10 @@ public class Principal {
 			cineUcs.removeFilme(cineUcs.selecionarFilme(opcao));
 			gravarDados();
 			dadosFilmesCinema();
-		case 4:
+		}
+		if (opcao == 4) {
 			menuCadastrar();
 		}
-
 	}
 
 	public void alterarDadosFilme() {
@@ -241,29 +242,57 @@ public class Principal {
 				}
 				if (opcao == 4) {
 					System.out.println("-----------------------");
+					int escolha;
 					subOpcao = 0;
-					do {
-						System.out.println("Gêneros do filme: " + filme.getGeneros());
-						System.out.println("Selecione o gênero do filme");
-						System.out.println(cineUcs.getDatabase().listarGeneros());
-						System.out.println("0 - Caso não tenha o gênero que procura e queira adicionar um gênero.");
-						subOpcao = sc.nextInt();
-						sc.nextLine();
-						if (subOpcao == 0) {
-							System.out.println("Digite o nome do gênero que queira adicionar");
+					System.out.println("Gêneros do filme: " + filme.getGeneros());
+					System.out.println("Selecione a opção:");
+					System.out.println("1 - Adicionar Gênero ao Filme");
+					System.out.println("2 - Remover Gênero do Filme");
+					System.out.println("3 - Retornar ao menu anterior");
+					escolha = sc.nextInt();
+					sc.nextLine();
+					if (escolha == 1) {
+						do {
+							System.out.println("Gêneros do filme: " + filme.getGeneros());
+							System.out.println("Selecione o gênero do filme");
+							System.out.println(cineUcs.getDatabase().listarGeneros());
+							System.out.println("0 - Caso não tenha o gênero que procura e queira adicionar um gênero.");
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							if (subOpcao == 0) {
+								System.out.println("Digite o nome do gênero que queira adicionar");
+								res = sc.nextLine();
+								System.out.println(cineUcs.getDatabase().adicionarGeneroALista(res));
+								gravarDados();
+							} else {
+								System.out.println(
+										filme.setGenero(cineUcs.getDatabase().selecionarGeneroDaLista(subOpcao)));
+								gravarDados();
+							}
+							System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
 							res = sc.nextLine();
-							System.out.println(cineUcs.getDatabase().adicionarGeneroALista(res));
+						} while (res.equalsIgnoreCase("s"));
+						alterarDadosFilme();
+					}
+					if (escolha == 2) {
+						do {
+							System.out.println("Selecione o gênero do filme");
+							System.out.println(filme.listarGenerosFilme());
+							subOpcao = sc.nextInt();
+							sc.nextLine();
+							System.out.println(filme.removeGeneros(subOpcao));
 							gravarDados();
-						} else {
-							System.out.println(filme.setGenero(cineUcs.getDatabase().selecionarGeneroDaLista(subOpcao)));
-							gravarDados();
-						}
-						System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
-						res = sc.nextLine();
+							System.out.println("Remover gênero do filme? [S] sim / [N] não");
+							res = sc.nextLine();
 
-					} while (res.equalsIgnoreCase("s"));
-					System.out.println(gravarDados());
-					opcao = 0;
+						} while (res.equalsIgnoreCase("s"));
+
+						System.out.println(gravarDados());
+						alterarDadosFilme();
+					}
+					if (escolha == 3) {
+						alterarDadosFilme();
+					}
 				}
 				if (opcao == 5) {
 					System.out.println("-----------------------");

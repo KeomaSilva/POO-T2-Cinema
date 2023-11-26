@@ -74,6 +74,21 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	}
 
+	public String listarGenerosFilme() {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(generos);
+			for (int i = 0; i < generos.size(); i++) {
+				str.append(i + 1 + ": " + generos.get(i).getNome());
+				str.append("\n");
+			}
+
+		} catch (Exception e) {
+
+		}
+		return str.toString();
+	}
+
 	public String setGenero(Genero genero) {
 		StringBuilder str = new StringBuilder();
 		try {
@@ -107,6 +122,22 @@ public class Filme implements Serializable, Comparable<Filme> {
 			e.printStackTrace();
 		}
 
+		return str.toString();
+
+	}
+
+	public String removeGeneros(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(generos);
+			generos.remove(index - 1);
+			str.append("Gênero removido do filme");
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
 		return str.toString();
 
 	}
