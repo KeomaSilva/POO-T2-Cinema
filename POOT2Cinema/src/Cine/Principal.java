@@ -243,19 +243,20 @@ public class Principal {
 					System.out.println("-----------------------");
 					subOpcao = 0;
 					do {
-						System.out.println("Gêneros do filme: " + filme.getGenero());
+						System.out.println("Gêneros do filme: " + filme.getGeneros());
 						System.out.println("Selecione o gênero do filme");
-						System.out.println(filme.listarGeneros());
+						System.out.println(cineUcs.getDatabase().listarGeneros());
 						System.out.println("0 - Caso não tenha o gênero que procura e queira adicionar um gênero.");
 						subOpcao = sc.nextInt();
 						sc.nextLine();
 						if (subOpcao == 0) {
 							System.out.println("Digite o nome do gênero que queira adicionar");
 							res = sc.nextLine();
-							System.out.println(filme.addGeneroALista(res));
+							System.out.println(cineUcs.getDatabase().adicionarGeneroALista(res));
+							gravarDados();
 						} else {
-							System.out.println(filme.setGenero(subOpcao));
-							System.out.println(filme.listarGeneros());
+							System.out.println(filme.setGenero(cineUcs.getDatabase().selecionarGeneroDaLista(subOpcao)));
+							System.out.println(cineUcs.getDatabase().listarGeneros());
 
 						}
 						System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
