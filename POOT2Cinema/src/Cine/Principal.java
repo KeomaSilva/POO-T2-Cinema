@@ -425,8 +425,8 @@ public class Principal {
 					if (escolha == 1) {
 						do {
 							System.out.println(cineUcs.getDatabase().listarDiretores());
-							System.out.println(
-									"0 - Caso não tenha o diretor que procura (adicionar ao Banco de Dados)");
+							System.out
+									.println("0 - Caso não tenha o diretor que procura (adicionar ao Banco de Dados)");
 							subOpcao = sc.nextInt();
 							sc.nextLine();
 							if (subOpcao == 0) {
@@ -475,9 +475,7 @@ public class Principal {
 				}
 
 			} while (opcao <= 0);
-		} else
-
-		{
+		} else {
 			System.out.println("-----------------------");
 			System.out.println("Não foi possível selecionar nenhum filme");
 			menuCadastrar();
@@ -486,11 +484,77 @@ public class Principal {
 	}
 
 	public void addAtorBanco() {
-		menu();
+		String res;
+		int opcao;
+		System.out.println("-----------------------");
+		System.out.println("Todos os atores/atrizes do banco de dados");
+		System.out.println(cineUcs.getDatabase().listarAtores());
+		System.out.println("Gostaria de adicionar ator/atriz? [S] sim / [N] não");
+		res = sc.nextLine();
+		if (res.equalsIgnoreCase("s")) {
+			do {
+				System.out.println("Digite o nome do ator/atriz que queira adicionar");
+				res = sc.nextLine();
+				System.out.println(cineUcs.getDatabase().adicionarAtoresALista(res));
+				gravarDados();
+				System.out.println("Gostaria de adicionar mais atores? [S] sim / [N] não");
+				res = sc.nextLine();
+			} while (res.equalsIgnoreCase("s"));
+
+		}
+		System.out.println("Gostaria de remover algum ator/atriz? [S] sim / [N] não");
+		res = sc.nextLine();
+		if (res.equalsIgnoreCase("s")) {
+			do {
+				System.out.println("Selecione o ator/atriz");
+				System.out.println(cineUcs.getDatabase().listarAtores());
+				opcao = sc.nextInt();
+				sc.nextLine();
+				System.out.println(cineUcs.getDatabase().removeAtoresBanco(opcao));
+				gravarDados();
+				System.out.println("Remover outro ator/atriz? [S] sim / [N] não");
+				res = sc.nextLine();
+			} while (res.equalsIgnoreCase("s"));
+
+		}
+		menuCadastrar();
 	}
 
 	public void addDiretorBanco() {
-		menu();
+		String res;
+		int opcao;
+		System.out.println("-----------------------");
+		System.out.println("Todos os Diretores do banco de dados");
+		System.out.println(cineUcs.getDatabase().listarDiretores());
+		System.out.println("Gostaria de adicionar diretor? [S] sim / [N] não");
+		res = sc.nextLine();
+		if (res.equalsIgnoreCase("s")) {
+			do {
+				System.out.println("Digite o nome do diretor que queira adicionar");
+				res = sc.nextLine();
+				System.out.println(cineUcs.getDatabase().adicionarDiretorALista(res));
+				gravarDados();
+				System.out.println("Gostaria de adicionar mais diretores? [S] sim / [N] não");
+				res = sc.nextLine();
+			} while (!res.equalsIgnoreCase("s"));
+
+		}
+		System.out.println("Gostaria de remover algum diretor? [S] sim / [N] não");
+		res = sc.nextLine();
+		if (res.equalsIgnoreCase("s")) {
+			do {
+				System.out.println("Selecione o diretor");
+				System.out.println(cineUcs.getDatabase().listarDiretores());
+				opcao = sc.nextInt();
+				sc.nextLine();
+				System.out.println(cineUcs.getDatabase().removeDiretorBanco(opcao));
+				gravarDados();
+				System.out.println("Remover outro diretor? [S] sim / [N] não");
+				res = sc.nextLine();
+			} while (!res.equalsIgnoreCase("s"));
+
+		}
+		menuCadastrar();
 	}
 
 	public String resgatarDados() {

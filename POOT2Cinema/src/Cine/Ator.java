@@ -9,6 +9,10 @@ public class Ator extends Pessoa implements Serializable, Comparable<Ator> {
 		this.setNome(nome);
 	}
 
+	public String toString() {
+		return this.getNome();
+	}
+
 	@Override
 	public int compareTo(Ator o) {
 
