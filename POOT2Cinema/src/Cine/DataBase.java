@@ -47,7 +47,7 @@ public class DataBase implements Serializable {
 		} else {
 			for (int i = 0; i < generosDataBase.size(); i++) {
 				String index = "" + (i + 1);
-				str.append(index + " - " + generosDataBase.get(i).getNome());
+				str.append(index + ": " + generosDataBase.get(i).getNome()+"  - ");
 			}
 		}
 		return str.toString();
@@ -57,8 +57,9 @@ public class DataBase implements Serializable {
 		Collections.sort(generosDataBase);
 		Genero x;
 		try {
-			x = generosDataBase.get(index);
+			x = generosDataBase.get(index-1);
 		} catch (Exception e) {
+			System.out.println("retornou genero null");
 			x = null;
 
 		}

@@ -200,7 +200,7 @@ public class Principal {
 		opcao = sc.nextInt();
 		filme = cineUcs.selecionarFilme(opcao);
 		if (filme != null) {
-			System.out.println("O filme selecionado foi:" + filme.getNome());
+			System.out.println("O filme selecionado foi:");
 			System.out.println(filme);
 			do {
 				System.out.println("-----------------------");
@@ -256,15 +256,14 @@ public class Principal {
 							gravarDados();
 						} else {
 							System.out.println(filme.setGenero(cineUcs.getDatabase().selecionarGeneroDaLista(subOpcao)));
-							System.out.println(cineUcs.getDatabase().listarGeneros());
-
+							gravarDados();
 						}
 						System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
 						res = sc.nextLine();
-						sc.nextLine();
 
 					} while (res.equalsIgnoreCase("s"));
 					System.out.println(gravarDados());
+					opcao = 0;
 				}
 				if (opcao == 5) {
 					System.out.println("-----------------------");
