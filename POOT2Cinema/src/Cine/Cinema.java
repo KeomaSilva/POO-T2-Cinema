@@ -107,7 +107,7 @@ public class Cinema implements Serializable {
 		int count = 0;
 		try {
 			if (salas.size() == 0) {
-				this.salas.add(new Sala(0));
+				this.salas.add(new Sala(1));
 			} else {
 				for (int i = 0; i < salas.size(); i++) {
 					if (salas.get(i).getNumero() == i + 1) {

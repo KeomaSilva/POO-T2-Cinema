@@ -76,15 +76,35 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	public String setGenero(Genero genero) {
 		StringBuilder str = new StringBuilder();
-		Collections.sort(generos);
-		if (generos.contains(genero)) {
-			str.append("Gênero já presente na lista");
-			str.append("Retornando ao menu anterior");
-		} else {
-			generos.add(genero);
-			str.append("Gênero adicionado à lista");
-			str.append("Gênero selecionado: " + genero.getNome());
-			str.append("Gênero alterado");
+		try {
+			if (generos == null) {
+				generos.add(genero);
+				str.append("Gênero adicionado");
+			} else {
+				Collections.sort(generos);
+				int count = 0;
+				if (generos.size() == 0) {
+					generos.add(genero);
+					str.append("Gênero selecionado: " + genero.getNome());
+					str.append("Gênero adicionado à lista");
+				} else {
+					for (Genero g : generos) {
+						if (g.getNome().equalsIgnoreCase(genero.getNome())) {
+							str.append("Gênero já presente na lista");
+							count++;
+							break;
+						}
+					}
+				}
+				if (count == 0) {
+					generos.add(genero);
+					str.append("Gênero selecionado: " + genero.getNome());
+					str.append("Gênero adicionado à lista");
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return str.toString();
