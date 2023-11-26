@@ -104,7 +104,7 @@ public class Principal {
 		System.out.println("Alterar endereço do Cinema? [S] sim / [N] não");
 		opcao = sc.nextLine();
 		if (opcao.equalsIgnoreCase(s)) {
-			System.out.println("Alter o endereço do cinema:");
+			System.out.println("Altere o endereço do cinema:");
 			res = sc.nextLine();
 			cineUcs.setEndereco(res);
 			System.out.println(gravarDados());
@@ -140,7 +140,7 @@ public class Principal {
 				sc.nextLine();
 				cineUcs.removeSala(cineUcs.selecionarSala(opcao));
 				System.out.println(gravarDados());
-				System.out.println("Remover outra sala ao Cinema? [S] sim / [N] não");
+				System.out.println("Remover outra sala do Cinema? [S] sim / [N] não");
 				res = sc.nextLine();
 			}
 		} while (res.equalsIgnoreCase(s));
@@ -153,6 +153,7 @@ public class Principal {
 		int opcao;
 
 		System.out.println("-----------------------");
+		System.out.println("--- Adicionar/Alterar Filmes em Cartaz ---");
 		System.out.println(cineUcs.filmesCatalago());
 		System.out.println("1 - Adicionar filme ao Catálago");
 		System.out.println("2 - Alterar dados de filme em cartaz");
@@ -171,8 +172,6 @@ public class Principal {
 			dadosFilmesCinema();
 		case 2:
 			alterarDadosFilme();
-			gravarDados();
-			dadosFilmesCinema();
 		case 3:
 			System.out.println("-----------------------");
 			System.out.println("Selecione o filme");
@@ -276,13 +275,13 @@ public class Principal {
 				if (opcao == 6) {
 					System.out.println("-----------------------");
 					System.out.println("Datas, horários e salas que o filme será apresentado");
-					System.out.println(filme.listarHorarios());
 					do {
+						String data;
+						String hora;
+						System.out.println(filme.listarHorarios());
 						System.out.println("Gostaria de acressentar outro horário? [S] - sim / [N] não");
 						res = sc.nextLine();
 						if (res.equalsIgnoreCase("s")) {
-							String data;
-							String hora;
 							System.out.println("Digite a data: exemplo: [20/12/2023]");
 							data = sc.nextLine();
 							System.out.println("Digite o horario: exemplo: [15:00] ");
@@ -290,28 +289,32 @@ public class Principal {
 							System.out.println("Escolha a Sala:");
 							System.out.println(cineUcs.listarSalas());
 							subOpcao = sc.nextInt();
+							sc.nextLine();
 							filme.addHorarios(data, hora, cineUcs.selecionarSala(subOpcao));
+							System.out.println(gravarDados());
 							System.out.println("-----------------------");
-							System.out.println(filme.listarHorarios());
 							subOpcao = 0;
 						} else {
 							subOpcao = 1;
 						}
-					} while (subOpcao != 0);
+					} while (subOpcao == 0);
 
 					do {
 						System.out.println("Gostaria de remover algum horário? [S] - sim / [N] não");
+						res = sc.nextLine();
 						if (res.equalsIgnoreCase("s")) {
 							System.out.println("Escolha o horário");
 							System.out.println(filme.listarHorarios());
 							subOpcao = sc.nextInt();
+							sc.nextLine();
 							System.out.println(filme.removeHorario(filme.selecionarHorario(subOpcao)));
+							System.out.println(gravarDados());
 							subOpcao = 0;
 						} else {
 							subOpcao = 1;
 						}
 
-					} while (subOpcao != 0);
+					} while (subOpcao == 0);
 
 					opcao = 0;
 				}
@@ -331,7 +334,7 @@ public class Principal {
 				if (opcao == 9) {
 					System.out.println("-----------------------");
 					System.out.println("Retornando para o menu cadastro");
-					menuCadastrar();
+					dadosFilmesCinema();
 
 				}
 
