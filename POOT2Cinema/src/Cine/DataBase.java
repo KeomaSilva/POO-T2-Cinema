@@ -1,14 +1,19 @@
 package Cine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DataBase {
-
+public class DataBase implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<Genero> generosDataBase;
 	private List<Ator> atoresDataBase;
 	private List<Diretor> diretoresDataBase;
+
+	public String toString() {
+		return "ela EXISTE";
+	}
 
 	public DataBase() {
 		generosDataBase = new ArrayList<>();
