@@ -26,7 +26,7 @@ public class Principal {
 		int opcao = 0;
 		do {
 			System.out.println("-----------------------");
-			System.out.println("Bem Vindo ao Cinema POO");
+			System.out.println("Bem Vindo ao Cinema: " + cineUcs.getNome());
 			System.out.println("1 - Comprar ingresso");
 			System.out.println("2 - Listar filmes do catálogo");
 			System.out.println("3 - Menu Cadastrar");
