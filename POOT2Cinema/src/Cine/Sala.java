@@ -12,7 +12,7 @@ public class Sala implements Serializable, Comparable<Sala> {
 	private List<Assento> lugares;
 
 	public Sala(int numero) {
-		this.nome = "" + numero;
+		this.nome = "10" + numero;
 		this.numero = numero;
 		lugares = new ArrayList<>();
 

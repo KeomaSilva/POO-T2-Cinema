@@ -122,32 +122,28 @@ public class Principal {
 		System.out.println(cineUcs.getSalas());
 		System.out.println("Adicionar sala ao Cinema? [S] sim / [N] não");
 		res = sc.nextLine();
-		if (res.equalsIgnoreCase(s)) {
-			cineUcs.addSala();
-			System.out.println(gravarDados());
-			do {
-				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
-				res = sc.nextLine();
+		do {
+			if (res.equalsIgnoreCase(s)) {
 				cineUcs.addSala();
 				System.out.println(gravarDados());
-			} while (res.equalsIgnoreCase(s));
-		}
+				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
+				res = sc.nextLine();
+			}
+		} while (res.equalsIgnoreCase(s));
 		System.out.println("Remover alguma sala do cinema? [S] sim / [N] não");
 		res = sc.nextLine();
-		if (res.equalsIgnoreCase(s)) {
-			int opcao;
-			System.out.println(cineUcs.listarSalas());
-			opcao = sc.nextInt();
-			sc.nextLine();
-			cineUcs.removeSala(cineUcs.selecionarSala(opcao));
-			System.out.println(gravarDados());
-			do {
-				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
-				res = sc.nextLine();
-				cineUcs.addSala();
+		do {
+			if (res.equalsIgnoreCase(s)) {
+				int opcao;
+				System.out.println(cineUcs.listarSalas());
+				opcao = sc.nextInt();
+				sc.nextLine();
+				cineUcs.removeSala(cineUcs.selecionarSala(opcao));
 				System.out.println(gravarDados());
-			} while (res.equalsIgnoreCase(s));
-		}
+				System.out.println("Remover outra sala ao Cinema? [S] sim / [N] não");
+				res = sc.nextLine();
+			}
+		} while (res.equalsIgnoreCase(s));
 		System.out.println("Retornando ao menu cadastrar");
 		menuCadastrar();
 	}
@@ -204,10 +200,9 @@ public class Principal {
 		System.out.println("Digite o número correspondente do filme:");
 		opcao = sc.nextInt();
 		filme = cineUcs.selecionarFilme(opcao);
-		gravarDados();
-		dadosFilmesCinema();
 		if (filme != null) {
 			System.out.println("O filme selecionado foi:" + filme.getNome());
+			System.out.println(filme);
 			do {
 				System.out.println("-----------------------");
 				System.out.println("Alterar quais dados do filme?");
@@ -222,28 +217,34 @@ public class Principal {
 				System.out.println("9 - Voltar ao menu anterior");
 				opcao = sc.nextInt();
 				sc.nextLine();
-				switch (opcao) {
-				case 1:
+				if (opcao == 1) {
 					System.out.println("-----------------------");
 					System.out.println("Digite o novo nome do filme");
 					filme.setNome(sc.nextLine());
-					gravarDados();
+					System.out.println(gravarDados());
 					dadosFilmesCinema();
-				case 2:
+				}
+				if (opcao == 2) {
 					System.out.println("-----------------------");
+					System.out.println("Duração do filme: " + filme.getDuracao());
 					System.out.println("Digite a nova duração do filme");
 					filme.setDuracao(sc.nextLine());
+					System.out.println(gravarDados());
 					opcao = 0;
-					alterarDadosFilme();
-				case 3:
+				}
+				if (opcao == 3) {
 					System.out.println("-----------------------");
+					System.out.println("Ano de lançamento do filme: " + filme.getAno());
 					System.out.println("Digite o ano do filme");
 					filme.setAno(sc.nextLine());
+					System.out.println(gravarDados());
 					opcao = 0;
-				case 4:
+				}
+				if (opcao == 4) {
 					System.out.println("-----------------------");
 					subOpcao = 0;
 					do {
+						System.out.println("Gêneros do filme: " + filme.getGenero());
 						System.out.println("Selecione o gênero do filme");
 						System.out.println(filme.listarGeneros());
 						System.out.println("0 - Caso não tenha o gênero que procura e queira adicionar um gênero.");
@@ -260,17 +261,19 @@ public class Principal {
 						}
 						System.out.println("Adicionar outro gênero ao filme? [S] sim / [N] não");
 						res = sc.nextLine();
-						System.out.println("");
+						sc.nextLine();
 
 					} while (res.equalsIgnoreCase("s"));
-					filme.setDuracao(sc.nextLine());
-					opcao = 0;
-				case 5:
+					System.out.println(gravarDados());
+				}
+				if (opcao == 5) {
 					System.out.println("-----------------------");
 					System.out.println("Digite a sinapse do filme");
 					filme.setDuracao(sc.nextLine());
+					System.out.println(gravarDados());
 					opcao = 0;
-				case 6:
+				}
+				if (opcao == 6) {
 					System.out.println("-----------------------");
 					System.out.println("Datas, horários e salas que o filme será apresentado");
 					System.out.println(filme.listarHorarios());
@@ -311,21 +314,28 @@ public class Principal {
 					} while (subOpcao != 0);
 
 					opcao = 0;
-				case 7:
+				}
+				if (opcao == 7) {
 					System.out.println("-----------------------");
+					System.out.println("7 - Elenco do Filme");
 
 					opcao = 0;
-				case 8:
-					System.out.println("-----------------------");
 
+				}
+				if (opcao == 8) {
+					System.out.println("-----------------------");
+					System.out.println("8 - Diretores do filme");
 					opcao = 0;
-				case 9:
+
+				}
+				if (opcao == 9) {
 					System.out.println("-----------------------");
 					System.out.println("Retornando para o menu cadastro");
 					menuCadastrar();
+
 				}
 
-			} while (opcao != 0);
+			} while (opcao <= 0);
 		} else
 
 		{
