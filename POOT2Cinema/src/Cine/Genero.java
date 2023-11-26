@@ -6,6 +6,9 @@ public class Genero implements Serializable, Comparable<Genero> {
 	private static final long serialVersionUID = 1L;
 	private String nome;
 
+	public String toString() {
+		return this.nome;
+	}
 	public Genero(String nome) {
 		this.nome = nome;
 	}

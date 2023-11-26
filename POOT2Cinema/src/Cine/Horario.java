@@ -13,8 +13,14 @@ public class Horario implements Serializable, Comparable<Horario> {
 		this.horario = horario;
 		this.sala = sala;
 	}
+
 	public String toString() {
-		return this.horario;
+		StringBuilder str = new StringBuilder();
+		str.append(this.data + " - ");
+		str.append(this.horario + " - ");
+		str.append(this.sala + " - ");
+		str.append("\n");
+		return str.toString();
 	}
 
 	public String getData() {
@@ -40,6 +46,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
+
 	@Override
 	public int compareTo(Horario o) {
 		return this.data.compareToIgnoreCase(o.data);

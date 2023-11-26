@@ -104,10 +104,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 		StringBuilder str = new StringBuilder();
 		Collections.sort(horarios);
 		for (int i = 0; i < horarios.size(); i++) {
-			String index = "" + (i + 1);
-			str.append(index + " - Data: " + horarios.get(i).getData() + " - " + horarios.get(i).getHorario()
-					+ " - Sala: " + horarios.get(i).getSala());
-			str.append("\n");
+			str.append(horarios.get(i));
 		}
 		return str.toString();
 	}
