@@ -121,6 +121,8 @@ public class Principal {
 										horarioSelecionado.ingressoComprado(horarioSelecionado.getCodigoHorario(),
 												assentoEscolhido, filme, horarioSelecionado, nomeCliente, celular,
 												horarioSelecionado.getSala(), meiaEntrada));
+								System.out.println("Horário selecionado: " + horarioSelecionado);
+								System.out.println("Assento escolhido: " + assentoEscolhido);
 								gravarDados();
 								System.out.println("Deseja comprar outro assento? [S] sim / [N] não");
 								res2 = sc.nextLine();

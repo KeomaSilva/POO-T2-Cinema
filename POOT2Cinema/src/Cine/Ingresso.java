@@ -18,13 +18,18 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 
 	public Ingresso(String codigoHorario, int assento, Filme filme, Horario horario, String nome, String celular,
 			Sala sala, String meiaEntrada) {
-		codigoIngresso = codigoHorario + assento;
 		this.filme = filme;
 		this.horario = horario;
 		nomeComprador = nome;
 		this.celular = celular;
 		this.meiaEntrada = meiaEntrada;
-		assentoNumero = "" + assento;
+		if (assento < 10 || assento >= 0) {
+			assentoNumero = "0" + assento;
+			codigoIngresso = codigoHorario + assento;
+		} else {
+			assentoNumero = "" + assento;
+			codigoIngresso = codigoHorario + assento;
+		}
 		this.assento = new Assento(assento, sala);
 
 	}
