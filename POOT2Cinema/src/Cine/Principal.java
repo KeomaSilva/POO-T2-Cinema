@@ -52,6 +52,28 @@ public class Principal {
 	}
 
 	public void comprarIngresso() {
+		Filme filme;
+		int opcao;
+		System.out.println("-----------------------");
+		System.out.println("----COMPRAR INGRESSO----");
+		System.out.println("Selecione o filme em cartaz");
+		System.out.println(cineUcs.filmesCatalago());
+		System.out.println("Digite o número correspondente do filme:");
+		opcao = sc.nextInt();
+		sc.next();
+		System.out.println(cineUcs.selecionarFilme(opcao));
+		filme = cineUcs.selecionarFilme(opcao);
+		System.out.println("Selecione o Horário de exibição");
+		System.out.println(filme.listarHorariosFilme());
+		System.out.println("0 - Voltar para o menu");
+		opcao = sc.nextInt();
+		sc.nextLine();
+		if(opcao == 0) {
+			System.out.println("Retornando ao menu principal");
+			menu();
+		}else {
+			filme.getHorarios().get(opcao);
+		}
 
 	}
 
@@ -354,9 +376,7 @@ public class Principal {
 							System.out.println(filme.listarHorariosFilme());
 							subOpcao = sc.nextInt();
 							sc.nextLine();
-							System.out.println(subOpcao);
-							System.out.println(subOpcao);
-							System.out.println(filme.removeHorario(subOpcao - 1));
+							System.out.println(filme.removeHorario(subOpcao));
 							System.out.println(gravarDados());
 							subOpcao = 0;
 						} else {
