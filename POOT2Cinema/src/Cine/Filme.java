@@ -215,7 +215,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 		StringBuilder str = new StringBuilder();
 		try {
 			Collections.sort(horarios);
-			horarios.remove(index);
+			horarios.remove(index-1);
 			str.append("Horário removido do filme");
 
 		} catch (
