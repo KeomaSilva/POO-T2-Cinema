@@ -16,14 +16,12 @@ public class Filme implements Serializable, Comparable<Filme> {
 	private List<Horario> horarios;
 	private List<Ator> atores;
 	private List<Diretor> diretores;
-	private List<Ingresso> ingressos;
 
 	public Filme() {
 		generos = new ArrayList<>();
 		horarios = new ArrayList<>();
 		atores = new LinkedList<>();
 		diretores = new LinkedList<>();
-		ingressos = new ArrayList<>();
 	}
 
 	public Filme(String nome) {
@@ -189,7 +187,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 					str.append("Horário adicionado à lista");
 				} else {
 					for (Horario h : horarios) {
-						if (h.getDataString().equalsIgnoreCase(horario.getDataString())) {
+						if (h.getCodigoHorario().equalsIgnoreCase(horario.getCodigoHorario())) {
 							str.append("Horário já presente na lista");
 							count++;
 							break;
@@ -204,7 +202,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			str.append("Não foi possível adicionar, horário já existente");
 		}
 
 		return str.toString();
@@ -215,7 +213,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 		StringBuilder str = new StringBuilder();
 		try {
 			Collections.sort(horarios);
-			horarios.remove(index-1);
+			horarios.remove(index - 1);
 			str.append("Horário removido do filme");
 
 		} catch (
@@ -225,6 +223,19 @@ public class Filme implements Serializable, Comparable<Filme> {
 		}
 		return str.toString();
 
+	}
+
+	public Horario selecionarHorarioFilme(int index) {
+		Collections.sort(horarios);
+		Horario x;
+		try {
+			x = horarios.get(index - 1);
+		} catch (Exception e) {
+			System.out.println("retornou horário null");
+			x = null;
+
+		}
+		return x;
 	}
 
 	public String getElenco() {
@@ -261,7 +272,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 	public String setElenco(Ator ator) {
 		StringBuilder str = new StringBuilder();
 		try {
-			if (generos == null) {
+			if (atores == null) {
 				atores.add(ator);
 				str.append("Ator adicionado");
 			} else {
@@ -279,11 +290,11 @@ public class Filme implements Serializable, Comparable<Filme> {
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					atores.add(ator);
-					str.append("Ator selecionado: " + ator.getNome());
-					str.append("Ator adicionado à lista");
+					if (count == 0) {
+						atores.add(ator);
+						str.append("Ator selecionado: " + ator.getNome());
+						str.append("Ator adicionado à lista");
+					}
 				}
 
 			}
@@ -345,7 +356,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 	public String setDiretor(Diretor diretor) {
 		StringBuilder str = new StringBuilder();
 		try {
-			if (generos == null) {
+			if (diretores == null) {
 				diretores.add(diretor);
 				str.append("Diretor adicionado");
 			} else {
@@ -363,11 +374,11 @@ public class Filme implements Serializable, Comparable<Filme> {
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					diretores.add(diretor);
-					str.append("Diretor selecionado: " + diretor.getNome());
-					str.append("Diretor adicionado à lista");
+					if (count == 0) {
+						diretores.add(diretor);
+						str.append("Diretor selecionado: " + diretor.getNome());
+						str.append("Diretor adicionado à lista");
+					}
 				}
 
 			}

@@ -2,9 +2,11 @@ package Cine;
 
 import java.io.Serializable;
 
-public class Ingresso implements Serializable{
+public class Ingresso implements Serializable, Comparable<Ingresso> {
 	private static final long serialVersionUID = 1L;
 
+	private String codigoIngresso;
+	private String assentoNumero;
 	private String nomeComprador;
 	private String data;
 	private String celular;
@@ -13,6 +15,44 @@ public class Ingresso implements Serializable{
 	private Assento assento;
 	private Filme filme;
 	private Horario horario;
+
+	public Ingresso(String codigoHorario, int assento, Filme filme, Horario horario, String nome, String celular,
+			Sala sala, String meiaEntrada) {
+		codigoIngresso = codigoHorario + assento;
+		this.filme = filme;
+		this.horario = horario;
+		nomeComprador = nome;
+		this.celular = celular;
+		this.meiaEntrada = meiaEntrada;
+		assentoNumero = "" + assento;
+		this.assento = new Assento(assento, sala);
+
+	}
+
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Filme: " + filme);
+		str.append("Horário: " + horario);
+		str.append("Nome: " + nomeComprador);
+		str.append("Contato: (54) " + celular);
+		return str.toString();
+	}
+
+	public String getCodigoIngresso() {
+		return codigoIngresso;
+	}
+
+	public void setCodigoIngresso(String codigoIngresso) {
+		this.codigoIngresso = codigoIngresso;
+	}
+
+	public String getAssentoNumero() {
+		return assentoNumero;
+	}
+
+	public void setAssentoNumero(String assentoNumero) {
+		this.assentoNumero = assentoNumero;
+	}
 
 	public String getNomeComprador() {
 		return nomeComprador;
@@ -76,6 +116,11 @@ public class Ingresso implements Serializable{
 
 	public void setHorario(Horario horario) {
 		this.horario = horario;
+	}
+
+	@Override
+	public int compareTo(Ingresso o) {
+		return codigoIngresso.compareTo(o.codigoIngresso);
 	}
 
 }
