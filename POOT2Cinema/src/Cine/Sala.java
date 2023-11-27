@@ -21,24 +21,6 @@ public class Sala implements Serializable, Comparable<Sala> {
 		lugares = new ArrayList<>();
 	}
 
-	public String matrixSala() {
-		StringBuilder str = new StringBuilder();
-		str.append("-------PROJETOR-------");
-		for (int i = this.fileira; i >= 0; i--) {
-			str.append("Linha " + (i - 1) + " ");
-			for (int j = 0; j < this.coluna; j++) {
-				if() {
-					str.append("- XX ");
-				}else {
-					str.append("- " + i + "" + j + " ");					
-				}
-			}
-		}
-		str.append("---------TELA---------");
-
-		return str.toString();
-	}
-
 	public String toString() {
 		return this.nome;
 	}

@@ -10,9 +10,8 @@ public class DataBase implements Serializable {
 	private List<Genero> generosDataBase;
 	private List<Ator> atoresDataBase;
 	private List<Diretor> diretoresDataBase;
-	private List<Horario> horariosDataBase;
-	private List<Horario> ingressoDataBase;
-
+	private List<String> horariosDataBase;
+	private List<String> ingressoDataBase;
 
 	public String toString() {
 		return "DataBase";
@@ -215,6 +214,52 @@ public class DataBase implements Serializable {
 			e.printStackTrace();
 		}
 		return str.toString();
+	}
+
+	public boolean adicionarHorariosALista(String horarioCodigo) {
+		boolean possui = false;
+		Collections.sort(horariosDataBase);
+		for (String h : horariosDataBase) {
+			if (h.equalsIgnoreCase(horarioCodigo)) {
+				possui = true;
+				break;
+			}
+
+		}
+		if (!possui) {
+			horariosDataBase.add(horarioCodigo);
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public boolean adicionarIngressosALista(String ingressoCodigo) {
+		boolean possui = false;
+		Collections.sort(ingressoDataBase);
+		for (String i : ingressoDataBase) {
+			if (i.equalsIgnoreCase(ingressoCodigo)) {
+				possui = true;
+				break;
+			}
+
+		}
+		if (!possui) {
+			ingressoDataBase.add(ingressoCodigo);
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public List<String> getIngressoDataBase() {
+		return ingressoDataBase;
+	}
+
+	public List<String> getHorariosDataBase() {
+		return horariosDataBase;
 	}
 
 	public List<Genero> getGenerosDataBase() {

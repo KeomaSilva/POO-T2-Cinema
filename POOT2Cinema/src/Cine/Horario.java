@@ -2,7 +2,6 @@ package Cine;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Horario implements Serializable, Comparable<Horario> {
@@ -41,6 +40,33 @@ public class Horario implements Serializable, Comparable<Horario> {
 		return str.toString();
 	}
 
+	public String matrixSala() {
+		StringBuilder str = new StringBuilder();
+		str.append("-------PROJETOR-------\n");
+		for (int i = this.sala.getFileira(); i > 0; i--) {
+			str.append("Linha " + (i - 1) + " ");
+			for (int j = 0; j < this.sala.getColuna(); j++) {
+				if (ingressos != null || ingressos.size() != 0) {
+					for (Ingresso ingresso : ingressos) {
+						if (ingresso.getAssentoNumero().equalsIgnoreCase(i + "" + j)) {
+							str.append("- XX ");
+						} else {
+							str.append("- " + i + "" + j + " ");
+						}
+
+					}
+				} else {
+					str.append("- " + i + "" + j + " ");
+				}
+
+			}
+			str.append("\n");
+		}
+		str.append("---------TELA---------");
+
+		return str.toString();
+	}
+
 	public String ingressoComprado(String codigoHorario, int assento, Filme filme, Horario horario, String nome,
 			String celular, Sala sala, String meiaEntrada) {
 		StringBuilder ingressoCodigo = new StringBuilder();
@@ -49,6 +75,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 		if (ingressos == null) {
 			ingressos.add(new Ingresso(codigoHorario, assento, filme, horario, nome, celular, sala, meiaEntrada));
 			ingressoCodigo.append("Compra do ingresso realizada");
+			ingressoCodigo.append("INGRESSO: " + ingressos.get(0));
 		} else {
 			for (Ingresso ingresso : ingressos) {
 				if (ingresso.getAssento().getCodigo() == assento + "") {
@@ -60,16 +87,12 @@ public class Horario implements Serializable, Comparable<Horario> {
 			if (!possui) {
 				ingressos.add(new Ingresso(codigoHorario, assento, filme, horario, nome, celular, sala, meiaEntrada));
 				ingressoCodigo.append("Compra do ingresso realizada");
+				ingressoCodigo.append(ingressos.get(ingressos.size() - 1));
 
 			}
 		}
 
 		return ingressoCodigo.toString();
-
-	}
-
-	public Ingresso mostrarIngressoComprado(String codigoHorario) {
-		return ingressos.get(ingressos.size() - 1);
 
 	}
 

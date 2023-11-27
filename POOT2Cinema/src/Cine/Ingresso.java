@@ -6,6 +6,7 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 	private static final long serialVersionUID = 1L;
 
 	private String codigoIngresso;
+	private String assentoNumero;
 	private String nomeComprador;
 	private String data;
 	private String celular;
@@ -23,6 +24,7 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 		nomeComprador = nome;
 		this.celular = celular;
 		this.meiaEntrada = meiaEntrada;
+		assentoNumero = "" + assento;
 		this.assento = new Assento(assento, sala);
 
 	}
@@ -33,12 +35,6 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 		str.append("Horário: " + horario);
 		str.append("Nome: " + nomeComprador);
 		str.append("Contato: (54) " + celular);
-		str.append("");
-		str.append("");
-		str.append("");
-		str.append("");
-		str.append("");
-		str.append("");
 		return str.toString();
 	}
 
@@ -48,6 +44,14 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 
 	public void setCodigoIngresso(String codigoIngresso) {
 		this.codigoIngresso = codigoIngresso;
+	}
+
+	public String getAssentoNumero() {
+		return assentoNumero;
+	}
+
+	public void setAssentoNumero(String assentoNumero) {
+		this.assentoNumero = assentoNumero;
 	}
 
 	public String getNomeComprador() {

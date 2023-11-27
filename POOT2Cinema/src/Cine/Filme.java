@@ -187,7 +187,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 					str.append("Horário adicionado à lista");
 				} else {
 					for (Horario h : horarios) {
-						if (h.getDataString().equalsIgnoreCase(horario.getDataString())) {
+						if (h.getCodigoHorario().equalsIgnoreCase(horario.getCodigoHorario())) {
 							str.append("Horário já presente na lista");
 							count++;
 							break;
@@ -202,7 +202,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			str.append("Não foi possível adicionar, horário já existente");
 		}
 
 		return str.toString();
@@ -272,7 +272,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 	public String setElenco(Ator ator) {
 		StringBuilder str = new StringBuilder();
 		try {
-			if (generos == null) {
+			if (atores == null) {
 				atores.add(ator);
 				str.append("Ator adicionado");
 			} else {
@@ -290,11 +290,11 @@ public class Filme implements Serializable, Comparable<Filme> {
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					atores.add(ator);
-					str.append("Ator selecionado: " + ator.getNome());
-					str.append("Ator adicionado à lista");
+					if (count == 0) {
+						atores.add(ator);
+						str.append("Ator selecionado: " + ator.getNome());
+						str.append("Ator adicionado à lista");
+					}
 				}
 
 			}
@@ -356,7 +356,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 	public String setDiretor(Diretor diretor) {
 		StringBuilder str = new StringBuilder();
 		try {
-			if (generos == null) {
+			if (diretores == null) {
 				diretores.add(diretor);
 				str.append("Diretor adicionado");
 			} else {
@@ -374,11 +374,11 @@ public class Filme implements Serializable, Comparable<Filme> {
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					diretores.add(diretor);
-					str.append("Diretor selecionado: " + diretor.getNome());
-					str.append("Diretor adicionado à lista");
+					if (count == 0) {
+						diretores.add(diretor);
+						str.append("Diretor selecionado: " + diretor.getNome());
+						str.append("Diretor adicionado à lista");
+					}
 				}
 
 			}
