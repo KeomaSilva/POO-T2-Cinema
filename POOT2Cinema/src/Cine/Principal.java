@@ -55,6 +55,7 @@ public class Principal {
 		Filme filme;
 		Horario horarioSelecionado;
 		String res;
+		String res2;
 		String nomeCliente;
 		String celular;
 		String meiaEntrada;
@@ -115,9 +116,13 @@ public class Principal {
 										horarioSelecionado.ingressoComprado(horarioSelecionado.getCodigoHorario(),
 												assentoEscolhido, filme, horarioSelecionado, nomeCliente, celular,
 												horarioSelecionado.getSala(), meiaEntrada));
+								gravarDados();
 								System.out.println("Deseja comprar outro assento? [S] sim / [N] não");
-								res = sc.nextLine();
-							} while (res.equalsIgnoreCase("s"));
+								res2 = sc.nextLine();
+								if (!res2.equalsIgnoreCase("s")) {
+									res = "n";
+								}
+							} while (res2.equalsIgnoreCase("s"));
 
 						} else {
 							System.out.println("Cancelando e retornando ao menu principal");
