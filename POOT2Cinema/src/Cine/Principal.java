@@ -94,6 +94,11 @@ public class Principal {
 								System.out.println(horarioSelecionado.matrixSala());
 								System.out.println("Digite o número correspondente do assento disponíveis");
 								assentoEscolhido = sc.nextInt();
+								while (assentoEscolhido > 99 || assentoEscolhido < 0) {
+									System.out.println("Assento não existente, por favor escolha outro.");
+									assentoEscolhido = sc.nextInt();
+								}
+
 								sc.nextLine();
 								System.out.println("Nome do comprador:");
 								nomeCliente = sc.nextLine();

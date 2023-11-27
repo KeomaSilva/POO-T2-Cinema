@@ -108,11 +108,11 @@ public class Filme implements Serializable, Comparable<Filme> {
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					generos.add(genero);
-					str.append("Gênero selecionado: " + genero.getNome());
-					str.append("Gênero adicionado à lista");
+					if (count == 0) {
+						generos.add(genero);
+						str.append("Gênero selecionado: " + genero.getNome());
+						str.append("Gênero adicionado à lista");
+					}
 				}
 
 			}
