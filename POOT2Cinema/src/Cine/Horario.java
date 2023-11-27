@@ -46,15 +46,21 @@ public class Horario implements Serializable, Comparable<Horario> {
 		for (int i = this.sala.getFileira(); i > 0; i--) {
 			str.append("Linha " + (i - 1) + " ");
 			for (int j = 0; j < this.sala.getColuna(); j++) {
-				if (ingressos != null || ingressos.size() != 0) {
+				if (ingressos != null) {
+					int count = 0;
 					for (Ingresso ingresso : ingressos) {
-						if (ingresso.getAssentoNumero().equalsIgnoreCase(i + "" + j)) {
-							str.append("- XX ");
-						} else {
-							str.append("- " + i + "" + j + " ");
+						if (ingresso.getAssentoNumero().equalsIgnoreCase((i - 1) + "" + j)) {
+							count = 1;
 						}
+					}
+					if (count != 0) {
+						str.append("- XX ");
+						count = 0;
+					} else {
+						str.append("- " + (i - 1) + "" + j + " ");
 
 					}
+
 				} else {
 					str.append("- " + i + "" + j + " ");
 				}
@@ -65,6 +71,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 		str.append("---------TELA---------");
 
 		return str.toString();
+
 	}
 
 	public String ingressoComprado(String codigoHorario, int assento, Filme filme, Horario horario, String nome,
