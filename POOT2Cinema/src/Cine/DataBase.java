@@ -10,6 +10,9 @@ public class DataBase implements Serializable {
 	private List<Genero> generosDataBase;
 	private List<Ator> atoresDataBase;
 	private List<Diretor> diretoresDataBase;
+	private List<Horario> horariosDataBase;
+	private List<Horario> ingressoDataBase;
+
 
 	public String toString() {
 		return "DataBase";
@@ -19,6 +22,8 @@ public class DataBase implements Serializable {
 		generosDataBase = new ArrayList<>();
 		atoresDataBase = new ArrayList<>();
 		diretoresDataBase = new ArrayList<>();
+		horariosDataBase = new ArrayList<>();
+		ingressoDataBase = new ArrayList<>();
 	}
 
 	public String adicionarGeneroALista(String nome) {

@@ -102,23 +102,23 @@ public class Cinema implements Serializable {
 
 	}
 
-	public void addSala() {
+	public void addSala(int fileiras, int colunas) {
 		Collections.sort(salas);
 		int count = 0;
 		try {
 			if (salas.size() == 0) {
-				this.salas.add(new Sala(1));
+				this.salas.add(new Sala(1, fileiras, colunas));
 			} else {
 				for (int i = 0; i < salas.size(); i++) {
 					if (salas.get(i).getNumero() == i + 1) {
 						count++;
 					}
 					if (count == i) {
-						this.salas.add(new Sala(i + 1));
+						this.salas.add(new Sala(i + 1, fileiras, colunas));
 						break;
 					}
 					if (count == salas.size()) {
-						this.salas.add(new Sala(count + 1));
+						this.salas.add(new Sala(count + 1, fileiras, colunas));
 						break;
 					}
 

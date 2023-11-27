@@ -53,7 +53,14 @@ public class Principal {
 
 	public void comprarIngresso() {
 		Filme filme;
+		Horario horarioSelecionado;
+		String res;
+		String nomeCliente;
+		String celular;
+		String meiaEntrada;
 		int opcao;
+		int assentoEscolhido;
+
 		System.out.println("-----------------------");
 		System.out.println("----COMPRAR INGRESSO----");
 		System.out.println("Selecione o filme em cartaz");
@@ -68,11 +75,50 @@ public class Principal {
 		System.out.println("0 - Voltar para o menu");
 		opcao = sc.nextInt();
 		sc.nextLine();
-		if(opcao == 0) {
-			System.out.println("Retornando ao menu principal");
+		try {
+			if (opcao == 0) {
+				System.out.println("Retornando ao menu principal");
+				menu();
+			} else {
+				do {
+					horarioSelecionado = filme.selecionarHorarioFilme(opcao);
+					System.out.println("Filme: " + filme);
+					System.out.println("Horário: " + horarioSelecionado);
+					System.out.println("Deseja continuar para a seleção do assento? [S] sim / [N] não");
+					res = sc.nextLine();
+					if (res.equalsIgnoreCase("s")) {
+						do {
+
+							System.out.println("Selecione o assento que deseja");
+							System.out.println(horarioSelecionado.getSala().matrixSala());
+							System.out.println("Digite o número correspondente do assento disponíveis");
+							assentoEscolhido = sc.nextInt();
+							sc.nextLine();
+							System.out.println("Nome do comprador:");
+							nomeCliente = sc.nextLine();
+							System.out.println("Celular para contato:");
+							celular = sc.nextLine();
+							System.out.println("Ingresso meia-entrada?[S] sim / [N] não");
+							meiaEntrada = sc.nextLine();
+							System.out.println(horarioSelecionado.ingressoComprado(
+									horarioSelecionado.getCodigoHorario(), assentoEscolhido, filme, horarioSelecionado,
+									nomeCliente, celular, horarioSelecionado.getSala(), meiaEntrada));
+							System.out.println(horarioSelecionado.mostrarIngressoComprado());
+							System.out.println("Deseja comprar outro assento? [S] sim / [N] não");
+							res = sc.nextLine();
+						} while (res.equalsIgnoreCase("s"));
+
+					} else {
+						System.out.println("Cancelando e retornando ao menu principal");
+						gravarDados();
+						menu();
+					}
+				} while (res.equalsIgnoreCase("s"));
+
+			}
+		} catch (Exception e) {
+			System.out.println("Error - retornando ao menu principal");
 			menu();
-		}else {
-			filme.getHorarios().get(opcao);
 		}
 
 	}
@@ -146,10 +192,23 @@ public class Principal {
 		res = sc.nextLine();
 		do {
 			if (res.equalsIgnoreCase(s)) {
-				cineUcs.addSala();
-				System.out.println(gravarDados());
-				System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
-				res = sc.nextLine();
+				try {
+					int fileira;
+					int coluna;
+					System.out.println("Digite o numero de fileiras na sala:");
+					fileira = sc.nextInt();
+					sc.nextLine();
+					System.out.println("Digite o númeor de colunas na sala:");
+					coluna = sc.nextInt();
+					sc.nextLine();
+					cineUcs.addSala(fileira, coluna);
+					System.out.println(gravarDados());
+					System.out.println("Adicionar outra sala ao Cinema? [S] sim / [N] não");
+					res = sc.nextLine();
+				} catch (Exception e) {
+					System.out.println("Digite um número para as respostas, exceto quando pede para continuar");
+					listarSalasCinema();
+				}
 			}
 		} while (res.equalsIgnoreCase(s));
 		System.out.println("Remover alguma sala do cinema? [S] sim / [N] não");

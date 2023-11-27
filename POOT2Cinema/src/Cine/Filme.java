@@ -16,14 +16,12 @@ public class Filme implements Serializable, Comparable<Filme> {
 	private List<Horario> horarios;
 	private List<Ator> atores;
 	private List<Diretor> diretores;
-	private List<Ingresso> ingressos;
 
 	public Filme() {
 		generos = new ArrayList<>();
 		horarios = new ArrayList<>();
 		atores = new LinkedList<>();
 		diretores = new LinkedList<>();
-		ingressos = new ArrayList<>();
 	}
 
 	public Filme(String nome) {
@@ -215,7 +213,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 		StringBuilder str = new StringBuilder();
 		try {
 			Collections.sort(horarios);
-			horarios.remove(index-1);
+			horarios.remove(index - 1);
 			str.append("Horário removido do filme");
 
 		} catch (
@@ -225,6 +223,19 @@ public class Filme implements Serializable, Comparable<Filme> {
 		}
 		return str.toString();
 
+	}
+
+	public Horario selecionarHorarioFilme(int index) {
+		Collections.sort(horarios);
+		Horario x;
+		try {
+			x = horarios.get(index - 1);
+		} catch (Exception e) {
+			System.out.println("retornou horário null");
+			x = null;
+
+		}
+		return x;
 	}
 
 	public String getElenco() {

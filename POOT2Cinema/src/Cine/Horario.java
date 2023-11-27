@@ -1,20 +1,26 @@
 package Cine;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Horario implements Serializable, Comparable<Horario> {
 	private static final long serialVersionUID = 1L;
+	private String codigoHorario;
 	private String dataString;
-	private String dataInvertida;
 	private String horario;
 	private Sala sala;
+	private List<Ingresso> ingressos;
 
 	public Horario(String data, int opcao, Sala sala) {
 		this.dataString = data;
 		String dataReplace = data.replace("/", " ");
 		String[] dataRepartida = dataReplace.split(" ");
-		this.dataInvertida = dataRepartida[2]+dataRepartida[1]+dataRepartida[0];
+		String dataInvertida = dataRepartida[2] + dataRepartida[1] + dataRepartida[0];
+		codigoHorario = dataInvertida + opcao + sala.getNome();
 		this.sala = sala;
+		ingressos = new ArrayList<>();
 		if (opcao == 1) {
 			this.horario = "15:00";
 		}
@@ -35,12 +41,44 @@ public class Horario implements Serializable, Comparable<Horario> {
 		return str.toString();
 	}
 
-	public String getDataInvertida() {
-		return dataInvertida;
+	public String ingressoComprado(String codigoHorario, int assento, Filme filme, Horario horario, String nome,
+			String celular, Sala sala, String meiaEntrada) {
+		StringBuilder ingressoCodigo = new StringBuilder();
+		ingressoCodigo.append("");
+		boolean possui = false;
+		if (ingressos == null) {
+			ingressos.add(new Ingresso(codigoHorario, assento, filme, horario, nome, celular, sala, meiaEntrada));
+			ingressoCodigo.append("Compra do ingresso realizada");
+		} else {
+			for (Ingresso ingresso : ingressos) {
+				if (ingresso.getAssento().getCodigo() == assento + "") {
+					possui = true;
+					ingressoCodigo.append("Assento da sala não está vago");
+					break;
+				}
+			}
+			if (!possui) {
+				ingressos.add(new Ingresso(codigoHorario, assento, filme, horario, nome, celular, sala, meiaEntrada));
+				ingressoCodigo.append("Compra do ingresso realizada");
+
+			}
+		}
+
+		return ingressoCodigo.toString();
+
 	}
 
-	public void setDataInvertida(String dataInvertida) {
-		this.dataInvertida = dataInvertida;
+	public Ingresso mostrarIngressoComprado(String codigoHorario) {
+		return ingressos.get(ingressos.size() - 1);
+
+	}
+
+	public String getCodigoHorario() {
+		return codigoHorario;
+	}
+
+	public void setCodigoHorario(String codigoHorario) {
+		this.codigoHorario = codigoHorario;
 	}
 
 	public String getDataString() {
@@ -69,7 +107,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 
 	@Override
 	public int compareTo(Horario o) {
-		return this.dataInvertida.compareTo(o.dataInvertida);
+		return this.codigoHorario.compareTo(o.codigoHorario);
 	}
 
 }
