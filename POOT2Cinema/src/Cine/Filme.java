@@ -142,51 +142,89 @@ public class Filme implements Serializable, Comparable<Filme> {
 
 	}
 
-	public String listarHorarios() {
+	public String getHorarios() {
 		StringBuilder str = new StringBuilder();
 		Collections.sort(horarios);
-		for (int i = 0; i < horarios.size(); i++) {
-			str.append(horarios.get(i));
+		str.append("Horários: ");
+		if (generos == null) {
+			str.append("Lista vazia");
+		} else {
+			for (Horario horario : horarios) {
+				str.append(horario + ", ");
+				str.append("\n");
+			}
+		}
+
+		return str.toString();
+
+	}
+
+	public String listarHorariosFilme() {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(horarios);
+			for (int i = 0; i < horarios.size(); i++) {
+				str.append(i + 1 + ": " + horarios.get(i));
+				str.append("\n");
+			}
+
+		} catch (Exception e) {
+
 		}
 		return str.toString();
 	}
 
-	public void addHorarios(String data, String horario, Sala sala) {
-
-		horarios.add(new Horario(data, horario, sala));
-
-	}
-
-	public Horario selecionarHorario(int index) {
-		Horario x = null;
-		Collections.sort(horarios);
+	public String setHorario(Horario horario) {
+		StringBuilder str = new StringBuilder();
 		try {
-			for (int i = 0; i < horarios.size(); i++) {
-				if (i == index - 1) {
-					x = horarios.get(i);
+			if (horarios == null) {
+				horarios.add(horario);
+				str.append("Horário adicionado");
+			} else {
+				Collections.sort(horarios);
+				int count = 0;
+				if (horarios.size() == 0) {
+					horarios.add(horario);
+					str.append("Horário selecionado: " + horario);
+					str.append("Horário adicionado à lista");
+				} else {
+					for (Horario h : horarios) {
+						if (h.compareTo(horario) == 0) {
+							str.append("Horário já presente na lista");
+							count++;
+							break;
+						}
+					}
 				}
+				if (count == 0) {
+					horarios.add(horario);
+					str.append("Horário selecionado: " + horario);
+					str.append("Horário adicionado à lista");
+				}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return x;
+
+		return str.toString();
+
 	}
 
-	public String removeHorario(Horario removeHorario) {
-		String res = "";
-		Collections.sort(horarios);
-		if (removeHorario != null) {
-			for (Horario horario : horarios) {
-				if (horario.equals(removeHorario)) {
-					horarios.remove(removeHorario);
-					res = "Horário retirado";
-				}
-			}
-		} else {
-			res = "Hoario não encontrado";
-		}
+	public String removeHorario(int index) {
+		StringBuilder str = new StringBuilder();
+		try {
+			Collections.sort(horarios);
+			horarios.remove(index - 1);
+			str.append("Horário removido do filme");
 
-		return res;
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return str.toString();
+
 	}
 
 	public String getElenco() {

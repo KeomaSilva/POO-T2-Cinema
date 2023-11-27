@@ -12,7 +12,7 @@ public class DataBase implements Serializable {
 	private List<Diretor> diretoresDataBase;
 
 	public String toString() {
-		return "ela EXISTE";
+		return "DataBase";
 	}
 
 	public DataBase() {
@@ -65,6 +65,7 @@ public class DataBase implements Serializable {
 		}
 		return x;
 	}
+
 	public String removeGenerosBanco(int index) {
 		StringBuilder str = new StringBuilder();
 		try {
@@ -130,7 +131,7 @@ public class DataBase implements Serializable {
 		return x;
 
 	}
-	
+
 	public String removeAtoresBanco(int index) {
 		StringBuilder str = new StringBuilder();
 		try {
@@ -195,6 +196,7 @@ public class DataBase implements Serializable {
 		return x;
 
 	}
+
 	public String removeDiretorBanco(int index) {
 		StringBuilder str = new StringBuilder();
 		try {

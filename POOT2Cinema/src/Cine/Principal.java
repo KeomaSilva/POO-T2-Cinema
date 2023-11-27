@@ -314,25 +314,35 @@ public class Principal {
 					System.out.println("Datas, horários e salas que o filme será apresentado");
 					do {
 						String data;
-						String hora;
-						System.out.println(filme.listarHorarios());
+						int hora;
+						System.out.println(filme.listarHorariosFilme());
 						System.out.println("Gostaria de acressentar outro horário? [S] - sim / [N] não");
 						res = sc.nextLine();
-						if (res.equalsIgnoreCase("s")) {
-							System.out.println("Digite a data: exemplo: [20/12/2023]");
-							data = sc.nextLine();
-							System.out.println("Digite o horario: exemplo: [15:00] ");
-							hora = sc.nextLine();
-							System.out.println("Escolha a Sala:");
-							System.out.println(cineUcs.listarSalas());
-							subOpcao = sc.nextInt();
-							sc.nextLine();
-							filme.addHorarios(data, hora, cineUcs.selecionarSala(subOpcao));
-							System.out.println(gravarDados());
-							System.out.println("-----------------------");
-							subOpcao = 0;
-						} else {
-							subOpcao = 1;
+
+						try {
+
+							if (res.equalsIgnoreCase("s")) {
+								System.out.println("Digite a data: exemplo: [20/12/2023]");
+								data = sc.nextLine();
+								System.out.println("Escolha o horário do filme:");
+								System.out.println("1 - 15:00");
+								System.out.println("2 - 18:00");
+								System.out.println("3 - 21:00");
+								hora = sc.nextInt();
+								sc.nextLine();
+								System.out.println("Escolha a Sala:");
+								System.out.println(cineUcs.listarSalas());
+								subOpcao = sc.nextInt();
+								sc.nextLine();
+								filme.setHorario(new Horario(data, hora, cineUcs.selecionarSala(subOpcao)));
+								System.out.println(gravarDados());
+								System.out.println("-----------------------");
+								subOpcao = 0;
+							} else {
+								subOpcao = 1;
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					} while (subOpcao == 0);
 
@@ -341,10 +351,10 @@ public class Principal {
 						res = sc.nextLine();
 						if (res.equalsIgnoreCase("s")) {
 							System.out.println("Escolha o horário");
-							System.out.println(filme.listarHorarios());
+							System.out.println(filme.listarHorariosFilme());
 							subOpcao = sc.nextInt();
 							sc.nextLine();
-							System.out.println(filme.removeHorario(filme.selecionarHorario(subOpcao)));
+							System.out.println(filme.removeHorario(subOpcao - 1));
 							System.out.println(gravarDados());
 							subOpcao = 0;
 						} else {
