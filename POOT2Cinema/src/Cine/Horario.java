@@ -1,20 +1,20 @@
 package Cine;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Horario implements Serializable, Comparable<Horario> {
 	private static final long serialVersionUID = 1L;
 	private String dataString;
+	private String dataInvertida;
 	private String horario;
 	private Sala sala;
-	private Date dataInicio;
 
 	public Horario(String data, int opcao, Sala sala) {
 		this.dataString = data;
-		int dataInt = Integer.parseInt(data);
+		String dataReplace = data.replace("/", " ");
+		String[] dataRepartida = dataReplace.split(" ");
+		this.dataInvertida = dataRepartida[2]+dataRepartida[1]+dataRepartida[0];
 		this.sala = sala;
-		this.dataInicio = new java.util.Date(data);
 		if (opcao == 1) {
 			this.horario = "15:00";
 		}
@@ -24,6 +24,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 		if (opcao == 3) {
 			this.horario = "21:00";
 		}
+		System.out.println(dataInvertida);
 	}
 
 	public String toString() {
@@ -34,12 +35,12 @@ public class Horario implements Serializable, Comparable<Horario> {
 		return str.toString();
 	}
 
-	public Date getDataInicio() {
-		return dataInicio;
+	public String getDataInvertida() {
+		return dataInvertida;
 	}
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setDataInvertida(String dataInvertida) {
+		this.dataInvertida = dataInvertida;
 	}
 
 	public String getDataString() {
@@ -68,7 +69,7 @@ public class Horario implements Serializable, Comparable<Horario> {
 
 	@Override
 	public int compareTo(Horario o) {
-		return this.dataString.compareTo(o.dataString);
+		return this.dataInvertida.compareTo(o.dataInvertida);
 	}
 
 }

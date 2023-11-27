@@ -354,6 +354,8 @@ public class Principal {
 							System.out.println(filme.listarHorariosFilme());
 							subOpcao = sc.nextInt();
 							sc.nextLine();
+							System.out.println(subOpcao);
+							System.out.println(subOpcao);
 							System.out.println(filme.removeHorario(subOpcao - 1));
 							System.out.println(gravarDados());
 							subOpcao = 0;

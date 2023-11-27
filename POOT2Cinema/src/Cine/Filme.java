@@ -189,17 +189,17 @@ public class Filme implements Serializable, Comparable<Filme> {
 					str.append("Horário adicionado à lista");
 				} else {
 					for (Horario h : horarios) {
-						if (h.compareTo(horario) == 0) {
+						if (h.getDataString().equalsIgnoreCase(horario.getDataString())) {
 							str.append("Horário já presente na lista");
 							count++;
 							break;
 						}
 					}
-				}
-				if (count == 0) {
-					horarios.add(horario);
-					str.append("Horário selecionado: " + horario);
-					str.append("Horário adicionado à lista");
+					if (count == 0) {
+						horarios.add(horario);
+						str.append("Horário selecionado: " + horario);
+						str.append("Horário adicionado à lista");
+					}
 				}
 
 			}
@@ -215,7 +215,7 @@ public class Filme implements Serializable, Comparable<Filme> {
 		StringBuilder str = new StringBuilder();
 		try {
 			Collections.sort(horarios);
-			horarios.remove(index - 1);
+			horarios.remove(index);
 			str.append("Horário removido do filme");
 
 		} catch (
