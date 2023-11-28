@@ -23,7 +23,7 @@ public class Ingresso implements Serializable, Comparable<Ingresso> {
 		nomeComprador = nome;
 		this.celular = celular;
 		this.meiaEntrada = meiaEntrada;
-		if (assento < 10 || assento >= 0) {
+		if (assento < 10 && assento >= 0) {
 			assentoNumero = "0" + assento;
 			codigoIngresso = codigoHorario + assento;
 		} else {
